@@ -1,9 +1,12 @@
-tittle: Meowpk  
+#tittle: Meowpk  
 #logo
-description: Student
+#description: Student
 #showdownloads: true
-theme: jekyll-theme-minimal
+#theme: jekyll-theme-minimal
 
-sass:
-  style: compressed
+
+title: Minimal Black
+description: A minimalist black-themed GitHub Page
+theme: null
+markdown: kramdown
 
