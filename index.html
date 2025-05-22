@@ -11,28 +11,50 @@
       background-color: #000;
       color: #fff;
       font-family: system-ui, sans-serif;
+    }
+
+    nav {
+      background: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      position: sticky;
+      top: 0;
+    }
+
+    nav a {
+      color: #0af;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
       text-align: center;
-    }
-    a {
-      color: #0af;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    h1 {
-      margin-bottom: 0.5em;
+      height: calc(100vh - 64px);
     }
   </style>
 </head>
 <body>
-  <h1>PONKAILASHRAJ</h1>
-  <p>Meaoww</p>
-  <p><a href="https://github.com/your-username/your-repo-name">View on GitHub</a></p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cv.html">CV</a>
+    <a href="notes.html">Notes</a>
+    <a href="research.html">Research</a>
+  </nav>
+
+  <main>
+    <h1>Minimal Black</h1>
+    <p>A minimalist black-themed GitHub Page</p>
+    <p><a href="https://github.com/your-username/your-repo-name">View on GitHub</a></p>
+  </main>
 </body>
 </html>
