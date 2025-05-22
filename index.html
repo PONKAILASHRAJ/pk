@@ -3,13 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minimal Black</title>
+  <title>B. Pon Kailash Raj</title>
   <style>
+    :root {
+      --burgundy: #800020;
+    }
+
     body {
       margin: 0;
       padding: 0;
       background-color: #000;
-      color: #fff;
+      color: var(--burgundy);
       font-family: system-ui, sans-serif;
     }
 
@@ -17,14 +21,12 @@
       background: #111;
       padding: 1rem 2rem;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 2rem;
-      position: sticky;
-      top: 0;
     }
 
     nav a {
-      color: #0af;
+      color: var(--burgundy);
       text-decoration: none;
       font-weight: bold;
     }
@@ -33,13 +35,32 @@
       text-decoration: underline;
     }
 
-    main {
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
       height: calc(100vh - 64px);
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--burgundy);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      margin: 0.5rem 0 0.25rem;
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 0.25rem 0;
+      color: var(--burgundy);
     }
   </style>
 </head>
@@ -51,10 +72,11 @@
     <a href="research.html">Research</a>
   </nav>
 
-  <main>
-    <h1>Minimal Black</h1>
-    <p>A minimalist black-themed GitHub Page</p>
-    <p><a href="https://github.com/your-username/your-repo-name">View on GitHub</a></p>
-  </main>
+  <div class="container">
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+    <h1>B. Pon Kailash Raj</h1>
+    <p>B.Tech Mathematics and Computing</p>
+    <p>Indian Institute of Science, Bengaluru</p>
+  </div>
 </body>
 </html>
