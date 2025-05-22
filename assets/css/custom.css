@@ -1,0 +1,25 @@
+/* assets/css/custom.css */
+
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+a {
+  color: #90caf9;
+}
+
+a:visited {
+  color: #ce93d8;
+}
+
+.site-header, .site-footer {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
+}
+
+/* More tweaks can go here */
