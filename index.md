@@ -1,21 +1,38 @@
----
-layout: home
-title: Welcome
----
-
-# 👋 Welcome to My Site
-
-I'm **B. Pon Kailash Raj**, a B.Tech Mathematics and Computing student at IISc Bengaluru.  
-This site is a collection of my notes, thoughts, and projects in:
-
-Analysis and Probability Theory
-
-## 📬 Latest Posts
-
-<!-- If you're using `minima` theme or another that supports posts, they will be listed automatically. -->
-
-Check out the blog section for updates and new articles!
-
----
-
-> Built with [Jekyll](https://jekyllrb.com/) and hosted on [GitHub Pages](https://pages.github.com/).
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Minimal Black</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    a {
+      color: #0af;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h1 {
+      margin-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Minimal Black</h1>
+  <p>A minimalist black-themed GitHub Page</p>
+  <p><a href="https://github.com/your-username/your-repo-name">View on GitHub</a></p>
+</body>
+</html>
