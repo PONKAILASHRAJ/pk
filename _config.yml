@@ -3,3 +3,6 @@ tittle: Meowpk
 description: Student
 #showdownloads: true
 theme: jekyll-theme-midnight
+
+markdown: kramdown
+highlighter: rouge
