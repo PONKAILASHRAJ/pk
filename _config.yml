@@ -3,3 +3,7 @@ tittle: Meowpk
 description: Student
 #showdownloads: true
 theme: jekyll-theme-minimal
+
+sass:
+  style: compressed
+
