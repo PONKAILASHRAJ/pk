@@ -8,9 +8,7 @@ title: Welcome
 I'm **B. Pon Kailash Raj**, a B.Tech Mathematics and Computing student at IISc Bengaluru.  
 This site is a collection of my notes, thoughts, and projects in:
 
-- 🧮 Probability & Stochastic Processes  
-- 📈 Optimal Transport & Random Graphs  
-- 🧠 Information Theory & Complex Systems  
+Analysis and Probability Theory
 
 ## 📬 Latest Posts
 
