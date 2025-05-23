@@ -1,5 +1,95 @@
-<ul>
-  <li><a href="pdfs/measure-theory.pdf" target="_blank">📄 Measure Theory</a></li>
-  <li><a href="pdfs/brownian-motion.pdf" target="_blank">📄 Brownian Motion</a></li>
-  <li><a href="pdfs/ergodic-theory.pdf" target="_blank">📄 Ergodic Theory</a></li>
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes – B. Pon Kailash Raj</title>
+  <style>
+    :root {
+      --dark-bg: #121212;
+      --highlight: #B22222; /* dark red */
+      --text: #e0e0e0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--dark-bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+    }
+
+    nav {
+      background: #111;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: left;
+    }
+
+    h1 {
+      color: var(--highlight);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 1rem;
+    }
+
+    a.pdf-link {
+      color: var(--text);
+      text-decoration: none;
+      border-left: 4px solid var(--highlight);
+      padding-left: 0.5rem;
+      display: block;
+      transition: 0.2s;
+    }
+
+    a.pdf-link:hover {
+      color: var(--highlight);
+      background-color: #1e1e1e;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../cv.html">CV</a>
+    <a href="index.html">Notes</a>
+    <a href="../research.html">Research</a>
+  </nav>
+
+  <div class="container">
+    <h1>📘 Notes</h1>
+    <ul>
+      <li><a class="pdf-link" href="pdfs/measure-theory.pdf" target="_blank">Measure Theory</a></li>
+      <li><a class="pdf-link" href="pdfs/brownian-motion.pdf" target="_blank">Brownian Motion</a></li>
+      <li><a class="pdf-link" href="pdfs/ergodic-theory.pdf" target="_blank">Ergodic Theory</a></li>
+      <!-- Add more notes here -->
+    </ul>
+  </div>
+</body>
+</html>
