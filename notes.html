@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes | B. Pon Kailash Raj</title>
+  <style>
+    :root {
+      --bg: #050505;
+      --text: #D9D9D9;
+      --accent: #374878;
+      --highlight: #00FFFF;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+    }
+
+    nav {
+      background: #0D0F17;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    .container {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--text);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+    }
+
+    h2 {
+      color: var(--highlight);
+      margin-top: 3rem;
+    }
+
+    .note {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background-color: #0D0F17;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+    }
+
+    .note h3 {
+      margin: 0 0 0.5rem;
+      color: var(--text);
+    }
+
+    .meta {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .meta span {
+      margin-right: 1.5rem;
+    }
+
+    .note a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cv.html">CV</a>
+    <a href="notes.html">Notes</a>
+    <a href="research.html">Research</a>
+  </nav>
+
+  <div class="container">
+    <h1>Notes</h1>
+
+    <h2>Stochastic Processes</h2>
+
+    <div class="note">
+      <h3><a href="notes/martingales.html">Martingales and Stopping Times</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Measure theory, Conditional Expectation</span>
+        <span>Last updated: June 20, 2025</span>
+      </div>
+      <p>Martingale convergence theorems, optional stopping, Doob decomposition, and applications.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/markov-chains.html">Discrete-Time Markov Chains</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Basic probability</span>
+        <span>Last updated: June 15, 2025</span>
+      </div>
+      <p>Classification of states, stationary distributions, recurrence/transience, ergodicity.</p>
+    </div>
+
+    <h2>Random Graphs & Percolation</h2>
+
+    <div class="note">
+      <h3><a href="notes/erdos-renyi.html">Erdős–Rényi Model and Phase Transition</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Combinatorics, Limit Theorems</span>
+        <span>Last updated: June 10, 2025</span>
+      </div>
+      <p>Threshold phenomena, connected components, emergence of the giant component.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/percolation.html">Percolation Theory on Z²</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Probability, Graph Theory</span>
+        <span>Last updated: June 22, 2025</span>
+      </div>
+      <p>Site and bond percolation, critical probability, uniqueness of the infinite cluster.</p>
+    </div>
+
+    <h2>Applied Probability</h2>
+
+    <div class="note">
+      <h3><a href="notes/queueing.html">Queueing Theory Basics</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Markov chains</span>
+        <span>Last updated: June 19, 2025</span>
+      </div>
+      <p>M/M/1 and M/M/c queues, Little's law, birth-death processes.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/mcmc.html">Introduction to MCMC</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Markov chains, Simulation</span>
+        <span>Last updated: June 12, 2025</span>
+      </div>
+      <p>Metropolis-Hastings algorithm, Gibbs sampling, convergence diagnostics.</p>
+    </div>
+  </div>
+</body>
+</html>
