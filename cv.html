@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CV | B. Pon Kailash Raj</title>
+  <style>
+    /* (same CSS as in index.html) */
+    :root {
+      --bg: #050505;
+      --text: #D9D9D9;
+      --accent: #374878;
+      --highlight: #00FFFF;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+    }
+
+    nav {
+      background: #0D0F17;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--highlight);
+    }
+
+    .container {
+      padding: 4rem 2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--text);
+    }
+
+    p, li {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cv.html">CV</a>
+    <a href="notes.html">Notes</a>
+    <a href="research.html">Research</a>
+  </nav>
+
+  <div class="container">
+    <h1>Curriculum Vitae</h1>
+    <p><a href="assets/cv.pdf" style="color: var(--highlight);">Download PDF</a></p>
+    <ul>
+      <li>Education: B.Tech in Mathematics and Computing, IISc</li>
+      <li>Research Interests: Stochastic Processes, Random Graphs, Optimal Transport</li>
+      <li>Relevant Coursework: Analysis, Probability, Information Theory</li>
+      <!-- Add more details as needed -->
+    </ul>
+  </div>
+</body>
+</html>
