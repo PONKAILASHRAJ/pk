@@ -108,16 +108,18 @@
 
   /* Typewriter effect */
   .typewriter {
+    display: inline-block;
     overflow: hidden;
     border-right: .15em solid var(--highlight);
     white-space: nowrap;
     letter-spacing: .05em;
-    animation: typing 3s steps(24, end), blink-caret .75s step-end infinite;
+    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
+    width: 0;
   }
 
   @keyframes typing {
     from { width: 0 }
-    to { width: 100% }
+    to { width: 15.5ch; }
   }
 
   @keyframes blink-caret {
@@ -125,7 +127,7 @@
     50% { border-color: var(--highlight); }
   }
 
-  /* Apply fade-in to container items */
+  /* Apply fade-in to other container items */
   .container > * {
     opacity: 0;
     animation: fadeSlide 1s ease forwards;
@@ -133,8 +135,8 @@
 
   .container > *:nth-child(1) { animation-delay: 0.2s; }
   .container > *:nth-child(2) { animation-delay: 0.4s; }
-  .container > *:nth-child(3) { animation-delay: 0.6s; }
-  .container > *:nth-child(4) { animation-delay: 0.8s; }
+  .container > *:nth-child(3) { animation-delay: 0.8s; }
+  .container > *:nth-child(4) { animation-delay: 1s; }
   </style>
 </head>
 <body>
