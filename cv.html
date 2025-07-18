@@ -33,21 +33,19 @@
       text-decoration: none;
       font-weight: bold;
       position: relative;
-      padding-bottom: 2px; /* small padding so underline isn't too low */
+      padding-bottom: 2px;
     }
 
-    /* Underline on hover */
     nav a:hover,
     nav a.active {
       color: var(--highlight);
     }
 
-    /* Create underline directly under text */
     nav a::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;  /* exactly at the bottom of text */
+      bottom: 0;
       width: 0;
       height: 2px;
       background-color: var(--highlight);
@@ -63,6 +61,8 @@
       padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
     }
 
     h1 {
@@ -74,6 +74,31 @@
       font-weight: bold;
       font-size: 2.5rem;
       font-family: monospace, monospace;
+    }
+
+    /* Typewriter effect */
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 0.15em solid var(--highlight);
+      animation:
+        typing 2.5s steps(20, end),
+        blink 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 14ch } /* adjust number of characters */
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: var(--highlight); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
     }
 
     h2 {
@@ -116,21 +141,19 @@
 </head>
 <body>
   <nav>
-    <a href="index.html" class="">Home</a>
-    <a href="cv.html" class="">CV</a>
+    <a href="index.html">Home</a>
+    <a href="cv.html">CV</a>
     <a href="notes.html" class="active">Notes</a>
-    <a href="research.html" class="">Research</a>
+    <a href="research.html">Research</a>
   </nav>
 
-
-
-<div class="container">
-  <h1><span class="typewriter">Curriculum Vitae</span></h1>
-  <h3><a href="notes/PK_Resume.pdf">CV (PDF)</a></h3>
-  <ul>
-    <li>Education: B.Tech in Mathematics and Computing, IISc</li>
-    <li>Research Interests: Probability theory</li>
-  </ul>
-</div>
+  <div class="container">
+    <h1><span class="typewriter">Curriculum Vitae</span></h1>
+    <h3><a href="notes/PK_Resume.pdf">CV (PDF)</a></h3>
+    <ul>
+      <li>Education: B.Tech in Mathematics and Computing, IISc</li>
+      <li>Research Interests: Probability theory</li>
+    </ul>
+  </div>
 </body>
 </html>
