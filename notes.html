@@ -48,6 +48,23 @@
       color: var(--text);
       border-bottom: 2px solid var(--accent);
       padding-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      display: inline-block;
+      animation: typing 2.5s steps(5, end) forwards;
+      font-weight: bold;
+    }
+
+    /* blinking cursor as separate span */
+    .cursor {
+      display: inline-block;
+      width: 0.15em;
+      background-color: var(--highlight);
+      margin-left: 2px;
+      animation: blink 0.7s step-start infinite;
+      vertical-align: bottom;
+      height: 1.2em;
     }
 
     h2 {
@@ -86,6 +103,16 @@
     .note a:hover {
       text-decoration: underline;
     }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 5ch }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -97,27 +124,21 @@
   </nav>
 
   <div class="container">
-    <h1>Notes</h1>
+    <h1 id="typewriter-text">Notes</h1><span id="cursor" class="cursor"></span>
 
     <h2>Stochastic Processes</h2>
 
-
-
     <div class="note">
-    <h3><a href="notes/poisson-process.pdf">Poisson Random Measures and Poisson Processes (PDF)</a></h3>
-    <div class="meta">
-<!--     <span>Prerequisites: Measure-theory, basic stochastic processes</span> -->
-      <span>Last updated: June 27, 2025</span>
+      <h3><a href="notes/poisson-process.pdf">Poisson Random Measures and Poisson Processes (PDF)</a></h3>
+      <div class="meta">
+        <!-- <span>Prerequisites: Measure-theory, basic stochastic processes</span> -->
+        <span>Last updated: June 27, 2025</span>
       </div>
-    <p>Cox processes</p>
+      <p>Cox processes</p>
     </div>
-
-
-
 
     <div class="note">
       <h3><a href="notes/PK_Resume.html">Martingales and Stopping Times</a></h3>
-
       <div class="meta">
         <span>Prerequisites: Measure theory, Conditional Expectation</span>
         <span>Last updated: June 20, 2025</span>
@@ -174,5 +195,12 @@
       <p>Metropolis-Hastings algorithm, Gibbs sampling, convergence diagnostics.</p>
     </div>
   </div>
+
+  <script>
+    // Hide cursor after typing animation (2.5s)
+    setTimeout(() => {
+      document.getElementById('cursor').style.display = 'none';
+    }, 2500);
+  </script>
 </body>
 </html>
