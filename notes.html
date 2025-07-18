@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Notes | PONKAILASHRAJ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notes | B. Pon Kailash Raj</title>
   <style>
     :root {
       --bg: #050505;
@@ -33,52 +33,84 @@
       text-decoration: none;
       font-weight: bold;
       position: relative;
-      padding-bottom: 4px; /* space for underline */
-      cursor: pointer;
+      padding-bottom: 2px; /* small padding so underline isn't too low */
     }
 
-    /* Thin underline animation on hover */
-    nav a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--highlight);
-      transition: width 0.3s ease;
-      border-radius: 2px;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Bold persistent underline for active link */
-    nav a.active::after {
-      width: 100%;
-      height: 4px;            /* thicker underline */
-      background-color: var(--highlight);
-      border-radius: 3px;
-      transition: none;       /* no animation, always visible */
-    }
-
+    /* Underline on hover */
+    nav a:hover,
     nav a.active {
       color: var(--highlight);
     }
 
-    /* Add styling for the container so content is visible */
+    /* Create underline directly under text */
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;  /* exactly at the bottom of text */
+      width: 0;
+      height: 2px;
+      background-color: var(--highlight);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+
     .container {
+      padding: 4rem 2rem;
       max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: var(--text);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
+      font-size: 2.5rem;
+      font-family: monospace, monospace;
+    }
+
+    h2 {
+      color: var(--highlight);
+      margin-top: 3rem;
+    }
+
+    .note {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background-color: #0D0F17;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+    }
+
+    .note h3 {
+      margin: 0 0 0.5rem;
       color: var(--text);
     }
 
-    .container h1 {
-      font-weight: 700;
-      font-size: 2rem;
-      margin-bottom: 1rem;
+    .meta {
+      font-size: 0.9rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .meta span {
+      margin-right: 1.5rem;
+    }
+
+    .note a {
+      color: var(--highlight);
+      text-decoration: none;
+    }
+
+    .note a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -92,7 +124,74 @@
 
   <div class="container">
     <h1>Notes</h1>
-    <p>Welcome to my notes page! Here you can add your notes content.</p>
+
+    <h2>Stochastic Processes</h2>
+
+    <div class="note">
+      <h3><a href="notes/poisson-process.pdf">Poisson Random Measures and Poisson Processes (PDF)</a></h3>
+      <div class="meta">
+        <span>Last updated: June 27, 2025</span>
+      </div>
+      <p>Cox processes</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/PK_Resume.html">Martingales and Stopping Times</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Measure theory, Conditional Expectation</span>
+        <span>Last updated: June 20, 2025</span>
+      </div>
+      <p>Martingale convergence theorems, optional stopping, Doob decomposition, and applications.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/markov-chains.html">Discrete-Time Markov Chains</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Basic probability</span>
+        <span>Last updated: June 15, 2025</span>
+      </div>
+      <p>Classification of states, stationary distributions, recurrence/transience, ergodicity.</p>
+    </div>
+
+    <h2>Random Graphs & Percolation</h2>
+
+    <div class="note">
+      <h3><a href="notes/erdos-renyi.html">Erdős–Rényi Model and Phase Transition</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Combinatorics, Limit Theorems</span>
+        <span>Last updated: June 10, 2025</span>
+      </div>
+      <p>Threshold phenomena, connected components, emergence of the giant component.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/percolation.html">Percolation Theory on Z²</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Probability, Graph Theory</span>
+        <span>Last updated: June 22, 2025</span>
+      </div>
+      <p>Site and bond percolation, critical probability, uniqueness of the infinite cluster.</p>
+    </div>
+
+    <h2>Applied Probability</h2>
+
+    <div class="note">
+      <h3><a href="notes/queueing.html">Queueing Theory Basics</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Markov chains</span>
+        <span>Last updated: June 19, 2025</span>
+      </div>
+      <p>M/M/1 and M/M/c queues, Little's law, birth-death processes.</p>
+    </div>
+
+    <div class="note">
+      <h3><a href="notes/mcmc.html">Introduction to MCMC</a></h3>
+      <div class="meta">
+        <span>Prerequisites: Markov chains, Simulation</span>
+        <span>Last updated: June 12, 2025</span>
+      </div>
+      <p>Metropolis-Hastings algorithm, Gibbs sampling, convergence diagnostics.</p>
+    </div>
   </div>
 </body>
 </html>
