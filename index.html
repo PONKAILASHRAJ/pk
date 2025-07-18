@@ -32,6 +32,25 @@
       color: var(--accent);
       text-decoration: none;
       font-weight: bold;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--highlight);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    nav a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     nav a:hover {
@@ -54,6 +73,7 @@
       object-fit: cover;
       border: 2px solid var(--accent);
       margin-bottom: 1rem;
+      animation: float 4s ease-in-out infinite;
     }
 
     h1 {
@@ -66,6 +86,34 @@
       margin: 0.25rem 0;
       color: var(--accent);
     }
+
+    /* Animations */
+    @keyframes fadeSlide {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    .container > * {
+      opacity: 0;
+      animation: fadeSlide 1s ease forwards;
+    }
+
+    .container > *:nth-child(1) { animation-delay: 0.2s; }
+    .container > *:nth-child(2) { animation-delay: 0.4s; }
+    .container > *:nth-child(3) { animation-delay: 0.6s; }
+    .container > *:nth-child(4) { animation-delay: 0.8s; }
   </style>
 </head>
 <body>
@@ -84,5 +132,3 @@
   </div>
 </body>
 </html>
-
-
