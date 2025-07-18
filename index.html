@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>PONKAILASHRAJ</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PONKAILASHRAJ</title>
+  <style>
   :root {
     --bg: #050505;
     --text: #D9D9D9;
@@ -15,26 +15,17 @@
   body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(120deg, #050505, #0d0f17, #050505);
-    background-size: 400% 400%;
+    background-color: var(--bg);
     color: var(--text);
     font-family: system-ui, sans-serif;
-    animation: gradientMove 15s ease infinite;
-  }
-
-  @keyframes gradientMove {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
   }
 
   nav {
-    background: rgba(13, 15, 23, 0.85);
+    background: #0D0F17;
     padding: 1rem 2rem;
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-    backdrop-filter: blur(4px);
   }
 
   nav a {
@@ -42,36 +33,38 @@
     text-decoration: none;
     font-weight: bold;
     position: relative;
-    padding-bottom: 2px;
     transition: color 0.3s ease;
   }
 
-  nav a:hover,
-  nav a.active {
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--highlight);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  nav a:hover {
     color: var(--highlight);
   }
 
-  nav a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--highlight);
-    transition: width 0.3s ease;
-  }
-
-  nav a:hover::after,
-  nav a.active::after {
-    width: 100%;
+  nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    height: calc(100vh - 64px); /* full height minus navbar */
   }
 
   .profile-pic {
@@ -79,111 +72,87 @@
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1.5rem;
-    border: 3px solid var(--accent);
-    box-shadow: 0 0 20px var(--accent);
-    background: linear-gradient(135deg, var(--accent), var(--highlight));
-    padding: 3px;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeSlideIn 1s ease forwards;
-  }
-
-  .profile-pic:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px var(--highlight);
-  }
-
-  h1 {
-    color: var(--text);
-    border-bottom: 2px solid var(--accent);
-    display: inline-block;
+    border: 2px solid var(--accent);
     margin-bottom: 1rem;
-    font-weight: bold;
-    font-size: 2.5rem;
-    font-family: monospace, monospace;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeSlideIn 1s ease forwards;
-    animation-delay: 0.5s;
+    animation: float 4s ease-in-out infinite;
   }
 
-  p {
-    margin: 0.5rem 0;
-    font-size: 1.1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeSlideIn 1s ease forwards;
+  /* Floating animation for profile picture */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
   }
-
-  p:nth-of-type(1) { animation-delay: 1s; }
-  p:nth-of-type(2) { animation-delay: 1.3s; }
 
   /* Typewriter effect */
   .typewriter {
     display: inline-block;
     overflow: hidden;
+    border-right: .15em solid var(--highlight);
     white-space: nowrap;
-    border-right: 0.15em solid var(--highlight);
-    animation:
-      typing 2.5s steps(20, end),
-      blink 0.75s step-end infinite;
-  }
-
-  .typewriter.animation-done {
-    border-right: none;
+    letter-spacing: .05em;
+    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
+    width: 0;
   }
 
   @keyframes typing {
     from { width: 0 }
-    to { width: 13ch; } /* adjust to your name length */
+    to { width: 17ch; } /* adjust to name length */
   }
 
-  @keyframes blink {
-    0%, 100% { border-color: transparent; }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
     50% { border-color: var(--highlight); }
   }
 
-  @keyframes fadeSlideIn {
-    to {
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 2rem;
+    color: var(--text);
+  }
+
+  p {
+    margin: 0.25rem 0;
+    color: var(--accent);
+  }
+
+  /* Fade-in slide-down effect for container children */
+  @keyframes fadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
-</style>
+
+  .container > * {
+    opacity: 0;
+    animation: fadeSlide 1s ease forwards;
+  }
+
+  .container > *:nth-child(1) { animation-delay: 0.2s; }
+  .container > *:nth-child(2) { animation-delay: 0.4s; }
+  .container > *:nth-child(3) { animation-delay: 0.8s; }
+  .container > *:nth-child(4) { animation-delay: 1s; }
+
+  </style>
 </head>
 <body>
-
   <nav>
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="cv.html">CV</a>
     <a href="notes.html">Notes</a>
     <a href="research.html">Research</a>
   </nav>
 
   <div class="container">
-    <img src="profile.jpg" alt="Profile picture of Pon Kailash Raj" class="profile-pic" />
-    <h1><span class="typewriter">PONKAILASHRAJ</span></h1>
+    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+    <h1 class="typewriter">B. Pon Kailash Raj</h1>
     <p>B.Tech Mathematics and Computing</p>
     <p>Indian Institute of Science, Bengaluru</p>
   </div>
-
-  <script>
-    // Remove blinking cursor after typing animation
-    setTimeout(() => {
-      const typewriter = document.querySelector('.typewriter');
-      typewriter.classList.add('animation-done');
-    }, 3000);
-
-    // Highlight current page link
-    const navLinks = document.querySelectorAll('nav a');
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    navLinks.forEach(link => {
-      if (link.getAttribute('href') === currentPage) {
-        link.classList.add('active');
-      }
-    });
-  </script>
 </body>
 </html>
