@@ -12,108 +12,129 @@
     --highlight: #00FFFF;
   }
 
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: system-ui, sans-serif;
-    }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: system-ui, sans-serif;
+  }
 
-    nav {
-      background: #0D0F17;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: flex-end; /* align to right */
-      gap: 2rem;
-    }
+  nav {
+    background: #0D0F17;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+  }
 
-    nav a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-    }
+  nav a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+  }
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background-color: var(--highlight);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
-    }
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--highlight);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
 
-    nav a:hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
+  nav a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
 
-    nav a:hover {
-      color: var(--highlight);
-    }
+  nav a:hover {
+    color: var(--highlight);
+  }
 
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      height: calc(100vh - 64px);
-    }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: calc(100vh - 64px);
+  }
 
-    .profile-pic {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--accent);
-      margin-bottom: 1rem;
-      animation: float 4s ease-in-out infinite;
-    }
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent);
+    margin-bottom: 1rem;
+    animation: float 4s ease-in-out infinite;
+  }
 
-    h1 {
-      margin: 0.5rem 0 0.25rem;
-      font-size: 2rem;
-      color: var(--text);
-    }
+  h1 {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 2rem;
+    color: var(--text);
+  }
 
-    p {
-      margin: 0.25rem 0;
-      color: var(--accent);
-    }
+  p {
+    margin: 0.25rem 0;
+    color: var(--accent);
+  }
 
-    /* Animations */
-    @keyframes fadeSlide {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
-    }
-
-    .container > * {
+  /* Fade-in slide-down effect */
+  @keyframes fadeSlide {
+    0% {
       opacity: 0;
-      animation: fadeSlide 1s ease forwards;
+      transform: translateY(-20px);
     }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-    .container > *:nth-child(1) { animation-delay: 0.2s; }
-    .container > *:nth-child(2) { animation-delay: 0.4s; }
-    .container > *:nth-child(3) { animation-delay: 0.6s; }
-    .container > *:nth-child(4) { animation-delay: 0.8s; }
+  /* Floating profile picture */
+  @keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+  }
+
+  /* Typewriter effect */
+  .typewriter {
+    overflow: hidden;
+    border-right: .15em solid var(--highlight);
+    white-space: nowrap;
+    letter-spacing: .05em;
+    animation: typing 3s steps(24, end), blink-caret .75s step-end infinite;
+  }
+
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--highlight); }
+  }
+
+  /* Apply fade-in to container items */
+  .container > * {
+    opacity: 0;
+    animation: fadeSlide 1s ease forwards;
+  }
+
+  .container > *:nth-child(1) { animation-delay: 0.2s; }
+  .container > *:nth-child(2) { animation-delay: 0.4s; }
+  .container > *:nth-child(3) { animation-delay: 0.6s; }
+  .container > *:nth-child(4) { animation-delay: 0.8s; }
   </style>
 </head>
 <body>
@@ -126,7 +147,7 @@
 
   <div class="container">
     <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h1>B. Pon Kailash Raj</h1>
+    <h1 class="typewriter">B. Pon Kailash Raj</h1>
     <p>B.Tech Mathematics and Computing</p>
     <p>Indian Institute of Science, Bengaluru</p>
   </div>
