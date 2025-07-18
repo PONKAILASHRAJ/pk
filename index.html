@@ -32,25 +32,6 @@ nav a {
   color: var(--accent);
   text-decoration: none;
   font-weight: bold;
-  position: relative;
-}
-
-nav a::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--highlight);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-
-nav a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
 }
 
 nav a:hover {
@@ -86,45 +67,38 @@ p {
   color: var(--accent);
 }
 
+/* Typewriter effect */
+
 .typewriter {
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
-  animation: typing 3s steps(16, end) forwards;
-  position: relative;
   font-weight: bold;
   font-size: 2rem;
-  color: var(--text);
   border-right: 0.15em solid var(--highlight);
-}
-
-/* Hide default border-right since we do the blinking with ::after */
-.typewriter::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-  width: 0.15em;
-  background-color: var(--highlight);
-  animation: 
-    blink-caret 0.75s step-end 4 alternate,
-    hide-caret 0.5s forwards;
+  animation:
+    typing 3s steps(18, end) forwards,
+    blink 0.75s step-end infinite;
+  animation-fill-mode: forwards;
   animation-delay: 0s, 3s;
 }
 
+/* typing animation - reveal text */
 @keyframes typing {
   from { width: 0; }
-  to { width: 16ch; }
+  to { width: 18ch; } /* 18 characters including spaces and dots */
 }
 
-@keyframes blink-caret {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+/* blinking cursor animation */
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: var(--highlight); }
 }
 
-@keyframes hide-caret {
-  to { opacity: 0; }
+/* Hide cursor after typing is done */
+.typewriter.animation-done {
+  border-right: none;
+  animation: none;
 }
 </style>
 </head>
@@ -142,5 +116,14 @@ p {
   <p>B.Tech Mathematics and Computing</p>
   <p>Indian Institute of Science, Bengaluru</p>
 </div>
+
+<script>
+// After the typing animation (3 seconds), remove the blinking cursor:
+const typewriter = document.querySelector('.typewriter');
+setTimeout(() => {
+  typewriter.classList.add('animation-done');
+}, 3000);
+</script>
+
 </body>
 </html>
