@@ -74,10 +74,10 @@
       overflow: hidden;
       white-space: nowrap;
       border-right: .15em solid var(--highlight);
-      width: 0;
       animation:
-        typing 2s steps(16, end) forwards, /* "Curriculum Vitae" is 16 chars including space */
+        typing 2s steps(16, end) forwards,
         blink-caret .75s step-end infinite;
+      font-size: 2rem;
     }
 
     p, li, h3 a {
@@ -92,27 +92,19 @@
       color: var(--highlight);
     }
 
-    /* Fade slide effect */
     @keyframes fadeSlide {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* Typewriter keyframes */
     @keyframes typing {
       from { width: 0; }
-      to { width: 16ch; }
+      to   { width: 16ch; }
     }
 
     @keyframes blink-caret {
       from, to { border-color: transparent; }
-      50% { border-color: var(--highlight); }
+      50%      { border-color: var(--highlight); }
     }
   </style>
 </head>
@@ -125,12 +117,11 @@
   </nav>
 
   <div class="container">
-    <h1 class="typewriter">Curriculum Vitae</h1>
+    <h1><span class="typewriter">Curriculum Vitae</span></h1>
     <h3><a href="notes/PK_Resume.pdf">CV (PDF)</a></h3>
     <ul>
       <li>Education: B.Tech in Mathematics and Computing, IISc</li>
       <li>Research Interests: Probability theory</li>
-      <!-- Add more details as needed -->
     </ul>
   </div>
 </body>
