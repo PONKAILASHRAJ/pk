@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>B. Pon Kailash Raj</title>
+<title>Notes - B. Pon Kailash Raj</title>
 <style>
   :root {
     --bg: #050505;
@@ -66,67 +66,21 @@
   }
 
   .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: calc(100vh - 64px);
-  }
-
-  .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--accent);
-    margin-bottom: 1rem;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   h1 {
-    margin: 0.5rem 0 0.25rem;
     font-size: 2rem;
     font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  /* You can style your notes content here */
+  .note {
+    margin-bottom: 1rem;
     color: var(--text);
-  }
-
-  p {
-    margin: 0.25rem 0;
-    color: var(--accent);
-  }
-
-  /* Typewriter effect */
-
-  .typewriter {
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    font-weight: 700;
-    font-size: 2rem;
-    border-right: 0.15em solid var(--highlight);
-    animation:
-      typing 3s steps(18, end) forwards,
-      blink 0.75s step-end infinite;
-    animation-fill-mode: forwards;
-    animation-delay: 0s, 3s;
-  }
-
-  /* typing animation - reveal text */
-  @keyframes typing {
-    from { width: 0; }
-    to { width: 18ch; }
-  }
-
-  /* blinking cursor animation */
-  @keyframes blink {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: var(--highlight); }
-  }
-
-  /* Hide cursor after typing is done */
-  .typewriter.animation-done {
-    border-right: none;
-    animation: none;
   }
 </style>
 </head>
@@ -139,19 +93,14 @@
   </nav>
 
   <div class="container">
-    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h1><span class="typewriter">PONKAILASHRAJ</span></h1>
-    <p>B.Tech Mathematics and Computing</p>
-    <p>Indian Institute of Science, Bengaluru</p>
+    <h1>Notes</h1>
+    <div class="note">
+      <!-- Your notes content here -->
+      <p>Welcome to my notes page.</p>
+    </div>
   </div>
 
   <script>
-    // Remove blinking cursor after typing animation
-    const typewriter = document.querySelector('.typewriter');
-    setTimeout(() => {
-      typewriter.classList.add('animation-done');
-    }, 3000);
-
     // Automatically add "active" class to nav link matching current page
     const navLinks = document.querySelectorAll('nav a');
     const currentPage = window.location.pathname.split('/').pop();
