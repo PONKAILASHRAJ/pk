@@ -17,7 +17,7 @@ body {
   padding: 0;
   background-color: var(--bg);
   color: var(--text);
-  font-family: system-ui, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 nav {
@@ -31,14 +31,16 @@ nav {
 nav a {
   color: var(--accent);
   text-decoration: none;
-  font-weight: 600; /* normal bold */
+  font-weight: 600; /* lighter bold */
   position: relative;
   padding-bottom: 4px;
   cursor: pointer;
+  transition: color 0.3s ease, font-weight 0.3s ease;
 }
 
-nav a:hover::after {
-  width: 100%;
+nav a.active {
+  color: var(--highlight);
+  font-weight: 900; /* very bold */
 }
 
 nav a::after {
@@ -53,10 +55,8 @@ nav a::after {
   border-radius: 2px;
 }
 
-/* Active link styles */
-nav a.active {
-  color: var(--highlight);
-  font-weight: 900; /* extra bold */
+nav a:hover::after {
+  width: 100%;
 }
 
 nav a.active::after {
