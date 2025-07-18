@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Notes | PONKAILASHRAJ</title>
+  <title>CV | PONKAILASHRAJ</title>
   <style>
     :root {
       --bg: #050505;
@@ -62,7 +62,8 @@
       max-width: 900px;
       margin: 0 auto;
       opacity: 0;
-      animation: fadeIn 1s ease forwards;
+      transform: translateY(20px);
+      animation: fadeSlideIn 1s ease forwards;
     }
 
     h1 {
@@ -89,7 +90,7 @@
 
     @keyframes typing {
       from { width: 0 }
-      to { width: 14ch } /* adjust number of characters */
+      to { width: 16ch; } /* Adjusted for "Curriculum Vitae" */
     }
 
     @keyframes blink {
@@ -97,45 +98,50 @@
       50% { border-color: var(--highlight); }
     }
 
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    h2 {
-      color: var(--highlight);
-      margin-top: 3rem;
+    h3 {
+      margin-top: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 1s;
     }
 
-    .note {
-      margin: 1.5rem 0;
-      padding: 1rem;
-      background-color: #0D0F17;
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
-    }
-
-    .note h3 {
-      margin: 0 0 0.5rem;
-      color: var(--text);
-    }
-
-    .meta {
-      font-size: 0.9rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .meta span {
-      margin-right: 1.5rem;
-    }
-
-    .note a {
+    h3 a {
       color: var(--highlight);
       text-decoration: none;
     }
 
-    .note a:hover {
+    h3 a:hover {
       text-decoration: underline;
+    }
+
+    ul {
+      list-style: disc inside;
+      padding: 0;
+      margin-top: 1.5rem;
+    }
+
+    ul li {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    ul li:nth-child(1) { animation-delay: 1.3s; }
+    ul li:nth-child(2) { animation-delay: 1.6s; }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
