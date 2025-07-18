@@ -85,18 +85,7 @@
   p {
     margin: 0.25rem 0;
     color: var(--accent);
-  }
-
-  /* Fade-in slide-down effect */
-  @keyframes fadeSlide {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    animation: fadeSlide 1s ease forwards;
   }
 
   /* Floating profile picture */
@@ -110,16 +99,17 @@
   .typewriter {
     display: inline-block;
     overflow: hidden;
-    border-right: .15em solid var(--highlight);
     white-space: nowrap;
-    letter-spacing: .05em;
-    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
+    border-right: .15em solid var(--highlight);
     width: 0;
+    animation:
+      typing 3s steps(17, end) forwards,
+      blink-caret .75s step-end infinite;
   }
 
   @keyframes typing {
     from { width: 0 }
-    to { width: 15.5ch; }
+    to { width: 17ch; }
   }
 
   @keyframes blink-caret {
@@ -127,16 +117,21 @@
     50% { border-color: var(--highlight); }
   }
 
-  /* Apply fade-in to other container items */
-  .container > * {
-    opacity: 0;
-    animation: fadeSlide 1s ease forwards;
+  /* Fade-in slide-down for other texts */
+  @keyframes fadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .container > *:nth-child(1) { animation-delay: 0.2s; }
-  .container > *:nth-child(2) { animation-delay: 0.4s; }
-  .container > *:nth-child(3) { animation-delay: 0.8s; }
-  .container > *:nth-child(4) { animation-delay: 1s; }
+  /* delay fade-in of p tags */
+  .container p:nth-of-type(1) { animation-delay: 0.5s; }
+  .container p:nth-of-type(2) { animation-delay: 1s; }
   </style>
 </head>
 <body>
