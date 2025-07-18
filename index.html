@@ -28,13 +28,43 @@ nav {
   gap: 2rem;
 }
 
+/* Base nav link styles */
 nav a {
   color: var(--accent);
   text-decoration: none;
   font-weight: bold;
+  position: relative;
+  padding-bottom: 4px; /* space for underline */
+  cursor: pointer;
 }
 
-nav a:hover {
+/* Thin underline animation on hover */
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--highlight);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Bold persistent underline for active link */
+nav a.active::after {
+  width: 100%;
+  height: 4px;            /* thicker underline */
+  background-color: var(--highlight);
+  border-radius: 3px;
+  transition: none;       /* no animation, always visible */
+}
+
+nav a.active {
   color: var(--highlight);
 }
 
@@ -68,7 +98,6 @@ p {
 }
 
 /* Typewriter effect */
-
 .typewriter {
   display: inline-block;
   white-space: nowrap;
@@ -104,7 +133,7 @@ p {
 </head>
 <body>
 <nav>
-  <a href="index.html">Home</a>
+  <a href="index.html" class="active">Home</a>
   <a href="cv.html">CV</a>
   <a href="notes.html">Notes</a>
   <a href="research.html">Research</a>
@@ -118,12 +147,11 @@ p {
 </div>
 
 <script>
-// After the typing animation (3 seconds), remove the blinking cursor:
+// Remove blinking cursor after typing animation completes (3s)
 const typewriter = document.querySelector('.typewriter');
 setTimeout(() => {
   typewriter.classList.add('animation-done');
 }, 3000);
 </script>
-
 </body>
 </html>
