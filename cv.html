@@ -86,7 +86,9 @@ h1 {
   height: 100%;
   width: .15em;
   background-color: var(--highlight);
-  animation: blink-caret .75s step-end infinite;
+  animation: blink-caret 0.75s step-end infinite;
+  animation-iteration-count: 2.7;
+  animation-fill-mode: forwards;
 }
 
 p, li, h3 a {
@@ -112,8 +114,8 @@ h3 a:hover {
 }
 
 @keyframes blink-caret {
-  from, to { opacity: 0; }
-  50%      { opacity: 1; }
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
 }
 </style>
 </head>
