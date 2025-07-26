@@ -35,10 +35,6 @@
     position: relative;
   }
 
-  nav a.active {
-    color: var(--highlight);
-  }
-
   nav a::after {
     content: "";
     position: absolute;
@@ -59,6 +55,16 @@
 
   nav a:hover {
     color: var(--highlight);
+  }
+
+  /* Make underline visible for active link */
+  nav a.active {
+    color: var(--highlight);
+  }
+
+  nav a.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
   }
 
   .container {
@@ -93,8 +99,8 @@
     font-size: 2rem;
     color: var(--text);
     animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
-    animation-delay: 1.2s; /* delay so it starts after profile appears */
-    opacity: 1; /* force visible */
+    animation-delay: 1.2s;
+    opacity: 1;
   }
 
   p {
@@ -104,17 +110,15 @@
     animation: fadeSlide 1s ease forwards;
   }
 
-  p:nth-of-type(1) { animation-delay: 1.3s; }
-  p:nth-of-type(2) { animation-delay: 1.5s; }
+  p:nth-of-type(1) { animation-delay: 4.3s; }
+  p:nth-of-type(2) { animation-delay: 4.5s; }
 
-  /* Floating profile picture */
   @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
   }
 
-  /* Fade-in slide-down effect */
   @keyframes fadeSlide {
     0% {
       opacity: 0;
@@ -126,7 +130,6 @@
     }
   }
 
-  /* Typewriter effect */
   @keyframes typing {
     from { width: 0 }
     to { width: 15.5ch; }
@@ -148,7 +151,7 @@
 
   <div class="container">
     <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h1>PONKAILASHRAJ</h1>
+    <h1>B. Pon Kailash Raj</h1>
     <p>B.Tech Mathematics and Computing</p>
     <p>Indian Institute of Science, Bengaluru</p>
   </div>
