@@ -60,6 +60,7 @@
   /* Active link style */
   nav a.active {
     color: var(--highlight);
+    font-weight: bolder; /* force stronger bold */
   }
 
   nav a.active::after {
@@ -97,26 +98,17 @@
     color: var(--accent);
   }
 
-  /* Fade-in slide-down effect */
   @keyframes fadeSlide {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
-  /* Floating profile picture */
   @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
   }
 
-  /* Typewriter effect */
   .typewriter {
     display: inline-block;
     overflow: hidden;
@@ -137,7 +129,6 @@
     50% { border-color: var(--highlight); }
   }
 
-  /* Apply fade-in to other container items */
   .container > * {
     opacity: 0;
     animation: fadeSlide 1s ease forwards;
@@ -159,10 +150,9 @@
 
   <div class="container">
     <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h1 class="typewriter">PONKAILASHRAJ</h1>
+    <h1 class="typewriter">B. Pon Kailash Raj</h1>
     <p>B.Tech Mathematics and Computing</p>
     <p>Indian Institute of Science, Bengaluru</p>
   </div>
 </body>
 </html>
-
