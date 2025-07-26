@@ -35,6 +35,10 @@
     position: relative;
   }
 
+  nav a.active {
+    color: var(--highlight);
+  }
+
   nav a::after {
     content: "";
     position: absolute;
@@ -57,17 +61,6 @@
     color: var(--highlight);
   }
 
-  /* Active link style */
-  nav a.active {
-    color: var(--highlight);
-    font-weight: bolder; /* force stronger bold */
-  }
-
-  nav a.active::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
   .container {
     display: flex;
     flex-direction: column;
@@ -84,41 +77,56 @@
     object-fit: cover;
     border: 2px solid var(--accent);
     margin-bottom: 1rem;
-    animation: float 4s ease-in-out infinite;
+    animation: float 4s ease-in-out infinite, fadeSlide 1s ease forwards;
+    animation-delay: 0.2s;
+    opacity: 0;
   }
 
   h1 {
+    display: inline-block;
+    overflow: hidden;
+    border-right: .15em solid var(--highlight);
+    white-space: nowrap;
+    letter-spacing: .05em;
+    width: 0;
     margin: 0.5rem 0 0.25rem;
     font-size: 2rem;
     color: var(--text);
+    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
+    animation-delay: 1.2s; /* delay so it starts after profile appears */
+    opacity: 1; /* force visible */
   }
 
   p {
     margin: 0.25rem 0;
     color: var(--accent);
+    opacity: 0;
+    animation: fadeSlide 1s ease forwards;
   }
 
-  @keyframes fadeSlide {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
+  p:nth-of-type(1) { animation-delay: 4.3s; }
+  p:nth-of-type(2) { animation-delay: 4.5s; }
 
+  /* Floating profile picture */
   @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-5px); }
     100% { transform: translateY(0); }
   }
 
-  .typewriter {
-    display: inline-block;
-    overflow: hidden;
-    border-right: .15em solid var(--highlight);
-    white-space: nowrap;
-    letter-spacing: .05em;
-    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
-    width: 0;
+  /* Fade-in slide-down effect */
+  @keyframes fadeSlide {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
+  /* Typewriter effect */
   @keyframes typing {
     from { width: 0 }
     to { width: 15.5ch; }
@@ -128,16 +136,6 @@
     from, to { border-color: transparent }
     50% { border-color: var(--highlight); }
   }
-
-  .container > * {
-    opacity: 0;
-    animation: fadeSlide 1s ease forwards;
-  }
-
-  .container > *:nth-child(1) { animation-delay: 0.2s; }
-  .container > *:nth-child(2) { animation-delay: 0.4s; }
-  .container > *:nth-child(3) { animation-delay: 0.8s; }
-  .container > *:nth-child(4) { animation-delay: 1s; }
   </style>
 </head>
 <body>
@@ -150,7 +148,7 @@
 
   <div class="container">
     <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-    <h1 class="typewriter">B. Pon Kailash Raj</h1>
+    <h1>B. Pon Kailash Raj</h1>
     <p>B.Tech Mathematics and Computing</p>
     <p>Indian Institute of Science, Bengaluru</p>
   </div>
