@@ -31,7 +31,7 @@
       position: relative;
     }
 
-    /* --- BACKGROUND --- */
+    /* --- BACKGROUND TEXTURE --- */
     body::before {
       content: "";
       position: fixed;
@@ -66,7 +66,7 @@
       text-decoration: none;
       font-family: var(--font-header);
       font-weight: bold;
-      font-size: 0.9rem;
+      font-size: 0.9rem; /* Matches Home/Notes */
       letter-spacing: 0.1em;
       text-transform: uppercase;
       position: relative;
@@ -94,7 +94,7 @@
       width: 100%;
     }
 
-    /* --- CONTAINER --- */
+    /* --- MAIN CONTENT --- */
     .container {
       padding: 4rem 2rem;
       max-width: 900px;
@@ -114,7 +114,7 @@
       letter-spacing: 0.1em;
       text-shadow: 0 5px 15px rgba(0,0,0,0.8);
       
-      /* No cursor, just fade in */
+      /* Fade In Animation */
       opacity: 0;
       animation: fadeSlide 1s ease forwards;
     }
@@ -127,7 +127,7 @@
       animation-delay: 0.5s;
     }
 
-    /* Download Button Style */
+    /* Download Button Styling */
     h3 a {
       color: var(--highlight);
       text-decoration: none;
@@ -137,7 +137,7 @@
       border-radius: 4px;
       transition: all 0.3s ease;
       background: rgba(40, 0, 0, 0.3);
-      cursor: pointer;
+      cursor: pointer; /* Ensures it looks clickable */
     }
 
     h3 a:hover {
@@ -164,7 +164,7 @@
       position: relative;
     }
 
-    /* Red Bullet Points */
+    /* Custom Red Arrow Bullets */
     ul li::before {
       content: "›";
       position: absolute;
@@ -193,6 +193,7 @@
   </style>
 </head>
 <body>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="cv.html" class="active">CV</a>
@@ -203,12 +204,13 @@
   <div class="container">
     <h1>CURRICULUM VITAE</h1>
     
-    <h3><a href="#" onclick="alert('PDF coming soon!'); return false;">Download PDF</a></h3>
+    <h3><a href="#" onclick="alert('PDF coming soon! I have not uploaded it yet.'); return false;">Download PDF</a></h3>
     
     <ul>
       <li><strong style="color: var(--text)">Education:</strong> B.Tech in Mathematics and Computing, IISc</li>
       <li><strong style="color: var(--text)">Research Interests:</strong> Probability Theory, Stochastic Processes</li>
     </ul>
   </div>
+
 </body>
 </html>
