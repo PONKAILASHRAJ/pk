@@ -6,11 +6,11 @@
   <title>B. Pon Kailash Raj</title>
   <style>
   :root {
-    /* Color Palette - Kept the same as it works well with dark red */
+    /* --- THE VOID PALETTE --- */
     --bg: #000000;
-    --text: #bfaeae; /* Muted, pale red-grey */
-    --accent: #8f5e5e; /* Darker red for subtitles */
-    --highlight: #d64545; /* Bright red for active elements */
+    --text: #a8a8a8; /* Muted grey, legible against pitch black */
+    --accent: #520000; /* Dried blood red, very dark */
+    --highlight: #8a0000; /* Deep crimson for interactions */
   }
 
   body {
@@ -21,30 +21,29 @@
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    background-color: #000000;
   }
 
-  /* --- UPDATED SMOKY BACKGROUND --- */
+  /* --- ALMOST BLACK BACKGROUND --- */
   body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
-      /* UPDATED COLORS:
-         I replaced the previous brownish-reds with deeper, richer "blood red" tones 
-         (#4a0000, #380000) and tightened the gradients so more pure black shows through.
-      */
       background:
-          /* The Noise Texture (slightly reduced opacity for darker feel) */
-          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.04"/></svg>'),
-          /* Deep Blood Red Blob 1 (Top Left) */
-          radial-gradient(circle at 20% 30%, #4a0000 0%, transparent 70%),
-          /* Deep Blood Red Blob 2 (Bottom Right) */
-          radial-gradient(circle at 85% 85%, #380000 0%, transparent 60%),
-          /* Central very dark shadow */
-          radial-gradient(circle at 50% 50%, #1a0000 0%, transparent 100%),
-          /* Pure Black Base */
+          /* 1. Grain Texture (Very subtle) */
+          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.03"/></svg>'),
+          
+          /* 2. The "Shade" - Extremely deep, near-black reds */
+          /* Top Right faint glow */
+          radial-gradient(circle at 80% 20%, #0f0000 0%, transparent 50%),
+          /* Bottom Left faint glow */
+          radial-gradient(circle at 20% 80%, #0a0000 0%, transparent 60%),
+          
+          /* 3. Pure Black Base */
           #000000;
-      background-blend-mode: overlay, normal, normal, normal, normal;
+      
+      background-blend-mode: overlay, normal, normal, normal;
   }
 
   nav {
@@ -56,11 +55,11 @@
   }
 
   nav a {
-    color: var(--accent);
+    color: #555; /* Dark grey inactive links */
     text-decoration: none;
     font-weight: bold;
     position: relative;
-    transition: color 0.3s ease;
+    transition: color 0.4s ease;
   }
 
   nav a::after {
@@ -69,11 +68,11 @@
     bottom: -4px;
     left: 0;
     width: 100%;
-    height: 2px;
+    height: 1px; /* Thinner line for elegance */
     background-color: var(--highlight);
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.2s ease;
+    transition: transform 0.3s ease;
   }
 
   nav a:hover::after {
@@ -83,15 +82,11 @@
 
   nav a:hover {
     color: var(--highlight);
+    text-shadow: 0 0 15px rgba(138, 0, 0, 0.5); /* Faint red glow */
   }
 
   nav a.active {
     color: var(--highlight);
-  }
-
-  nav a.active::after {
-    transform: scaleX(1);
-    transform-origin: left;
   }
 
   .container {
@@ -108,12 +103,13 @@
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--accent);
+    border: 1px solid #330000; /* Barely visible red border */
     margin-bottom: 1rem;
     animation: float 3s ease-in-out infinite, fadeSlide 1s ease forwards;
     animation-delay: 0.2s;
     opacity: 0;
-    box-shadow: 0 0 25px rgba(60, 0, 0, 0.6); /* Made shadow subtly redder */
+    /* Very tight, dark shadow */
+    box-shadow: 0 0 30px rgba(20, 0, 0, 0.9); 
   }
 
   h1 {
@@ -125,11 +121,10 @@
     width: 0;
     margin: 0.5rem 0 0.25rem;
     font-size: 2rem;
-    color: var(--text);
+    color: #d1d1d1; /* Brighter text to pop against black */
     animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
     animation-delay: 0.1s;
     opacity: 1;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
   p {
