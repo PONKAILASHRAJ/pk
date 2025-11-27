@@ -4,12 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Notes | PONKAILASHRAJ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #050505;
-      --text: #D9D9D9;
-      --accent: #374878;
-      --highlight: #00FFFF;
+      /* --- CRIMSON WAVES PALETTE --- */
+      --bg: #000000;
+      --text: #c2baba; 
+      --accent: #6b0000; /* Richer blood red */
+      --highlight: #ff1a1a; /* Bright red */
+      --card-bg: rgba(20, 0, 0, 0.6); /* Translucent dark red for cards */
+      
+      --font-main: 'EB Garamond', serif;
+      --font-header: 'Cinzel', serif; 
     }
 
     body {
@@ -17,39 +27,70 @@
       padding: 0;
       background-color: var(--bg);
       color: var(--text);
-      font-family: system-ui, sans-serif;
+      font-family: var(--font-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
     }
 
+    /* --- BACKGROUND (Matches Index) --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      background:
+          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
+          repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60, 0, 0, 0.4) 12%, transparent 15%),
+          radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
+          radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
+          #000000;
+      background-blend-mode: color-dodge, normal, screen, normal;
+      animation: pulseRed 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseRed {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* --- NAVIGATION --- */
     nav {
-      background: #0D0F17;
-      padding: 1rem 2rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+      padding: 1.5rem 2rem;
       display: flex;
       justify-content: flex-end;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     nav a {
-      color: var(--accent);
+      color: #888;
       text-decoration: none;
+      font-family: var(--font-header);
       font-weight: bold;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       position: relative;
-      padding-bottom: 2px;
+      transition: all 0.4s ease;
     }
 
     nav a:hover,
     nav a.active {
-      color: var(--highlight);
+      color: #e0e0e0;
+      text-shadow: 0 0 10px var(--accent);
     }
 
     nav a::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -4px;
       width: 0;
-      height: 2px;
+      height: 1px;
       background-color: var(--highlight);
       transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--highlight);
     }
 
     nav a:hover::after,
@@ -57,74 +98,96 @@
       width: 100%;
     }
 
+    /* --- MAIN CONTENT --- */
     .container {
       padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeSlideIn 1s ease forwards;
     }
 
     h1 {
+      font-family: var(--font-header);
       color: var(--text);
       border-bottom: 2px solid var(--accent);
-      padding-bottom: 0;
+      padding-bottom: 10px;
       line-height: 1;
-      margin-bottom: 1.5rem;
-      font-weight: bold;
-      font-size: 2.5rem;
-      font-family: monospace, monospace;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.8);
     }
 
     h2 {
+      font-family: var(--font-header);
       color: var(--highlight);
-      margin-top: 3rem;
+      margin-top: 4rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      text-shadow: 0 0 10px rgba(107, 0, 0, 0.5);
     }
 
+    /* --- NOTE CARDS --- */
     .note {
-      margin: 1.5rem 0;
-      padding: 1rem;
-      background-color: #0D0F17;
-      border-left: 4px solid var(--accent);
-      border-radius: 8px;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      /* Glassy dark red background */
+      background-color: var(--card-bg);
+      border: 1px solid #330000;
+      border-left: 4px solid var(--highlight);
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(2px);
+    }
+
+    .note:hover {
+      transform: translateX(5px);
+      box-shadow: -5px 5px 20px rgba(40, 0, 0, 0.5);
+      background-color: rgba(40, 0, 0, 0.6);
     }
 
     .note h3 {
       margin: 0 0 0.5rem;
-      color: var(--text);
+      font-family: var(--font-header);
+      font-size: 1.2rem;
+    }
+
+    .note h3 a {
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .note h3 a:hover {
+      color: var(--highlight);
+      text-shadow: 0 0 8px var(--highlight);
     }
 
     .meta {
       font-size: 0.9rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: #8a8a8a; /* Dimmer grey */
+      margin-bottom: 1rem;
+      font-style: italic;
+      font-family: var(--font-main);
     }
 
     .meta span {
       margin-right: 1.5rem;
+      display: inline-block;
     }
 
-    .note a {
-      color: var(--highlight);
-      text-decoration: none;
+    .note p {
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
     }
 
-    .note a:hover {
-      text-decoration: underline;
-    }
-
-    /* Animations */
-    @keyframes fadeSlideIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
+    /* --- ANIMATIONS --- */
     .fade-up {
       opacity: 0;
-      transform: translateY(10px);
+      transform: translateY(20px);
       animation: fadeUp 0.8s ease forwards;
     }
 
@@ -139,7 +202,7 @@
 <body>
   <nav>
     <a href="index.html">Home</a>
-    <a href="cv.html">CV</a>
+    <a href="cv.pdf" target="_blank">CV</a> 
     <a href="notes.html" class="active">Notes</a>
     <a href="research.html">Research</a>
   </nav>
