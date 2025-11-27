@@ -11,13 +11,12 @@
 
   <style>
   :root {
-    /* --- THE GOTHIC PALETTE --- */
     --bg: #000000;
-    --text: #bfb4b4; /* Pale, bone-grey */
-    --accent: #5e0a0a; /* Dried blood red */
-    --highlight: #ff0000; /* Fresh blood/Glowing red */
+    --text: #c2baba; 
+    --accent: #6b0000; /* Richer blood red */
+    --highlight: #ff1a1a; 
     --font-main: 'EB Garamond', serif;
-    --font-header: 'Cinzel', serif; /* Roman/Gothic headers */
+    --font-header: 'Cinzel', serif; 
   }
 
   body {
@@ -31,21 +30,41 @@
     overflow-x: hidden;
   }
 
-  /* --- VOID BACKGROUND --- */
+  /* --- THE RED WAVE BACKGROUND --- */
   body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background:
-          /* Subtle Noise */
-          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.04"/></svg>'),
-          /* Deep Red Shadows */
-          radial-gradient(circle at 20% 20%, #1a0000 0%, transparent 60%),
-          radial-gradient(circle at 80% 80%, #0f0000 0%, transparent 60%),
-          /* Pure Black Base */
+          /* 1. FLUID WAVE TEXTURE (SVG) 
+             baseFrequency="0.009 0.08" stretches the noise horizontally to make "waves" */
+          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
+          
+          /* 2. RIPPLE GRADIENTS (The "Waves") */
+          repeating-radial-gradient(
+            circle at 50% 120%, 
+            transparent 0, 
+            transparent 10%, 
+            rgba(60, 0, 0, 0.4) 12%, 
+            transparent 15%
+          ),
+
+          /* 3. DEEP RED BLOBS */
+          radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
+          radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
+          
+          /* 4. BLACK BASE */
           #000000;
-      background-blend-mode: overlay, screen, normal;
+      
+      background-blend-mode: color-dodge, normal, screen, normal;
+      animation: pulseRed 8s ease-in-out infinite alternate;
+  }
+
+  /* Subtle pulsing of the background redness */
+  @keyframes pulseRed {
+    0% { opacity: 0.8; }
+    100% { opacity: 1; }
   }
 
   nav {
@@ -53,10 +72,12 @@
     display: flex;
     justify-content: flex-end;
     gap: 2.5rem;
+    /* Glassmorphism hint to separate nav from waves */
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
   }
 
   nav a {
-    color: #666; 
+    color: #888; 
     text-decoration: none;
     font-family: var(--font-header);
     font-size: 0.9rem;
@@ -66,38 +87,31 @@
     transition: all 0.4s ease;
   }
 
-  /* Blood drop underline effect */
   nav a::after {
     content: "";
     position: absolute;
     bottom: -5px;
     left: 50%;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
+    width: 0;
+    height: 1px;
     background-color: var(--highlight);
-    opacity: 0;
     transform: translateX(-50%);
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px var(--highlight);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px var(--highlight);
   }
 
   nav a:hover {
     color: #e0e0e0;
-    text-shadow: 0 0 8px var(--accent);
+    text-shadow: 0 0 10px var(--accent);
   }
 
   nav a:hover::after {
-    opacity: 1;
     width: 100%;
-    height: 1px;
-    border-radius: 0;
-    box-shadow: 0 0 5px var(--highlight);
   }
 
   nav a.active {
-    color: #a3a3a3;
-    border-bottom: 1px solid var(--accent);
+    color: #bbb;
+    text-shadow: 0 0 5px var(--accent);
   }
 
   .container {
@@ -114,14 +128,14 @@
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    /* Double border for a medallion look */
-    border: 1px solid #330000;
-    outline: 4px solid rgba(20, 0, 0, 0.5);
+    /* Dark Red Border */
+    border: 1px solid #4a0000;
     margin-bottom: 1.5rem;
     
     animation: float 4s ease-in-out infinite, fadeSlide 1.5s ease forwards;
     opacity: 0;
-    box-shadow: 0 0 40px rgba(40, 0, 0, 0.4);
+    /* Red glow behind the image */
+    box-shadow: 0 0 50px rgba(60, 0, 0, 0.6);
   }
 
   h1 {
@@ -132,25 +146,24 @@
     color: var(--text);
     margin: 0.5rem 0;
     
-    /* Typewriter effect variables */
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
-    border-right: 2px solid var(--accent); /* Dark red cursor */
+    border-right: 2px solid var(--highlight); 
     width: 0;
     
-    animation: typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
     animation-delay: 0.5s;
     
-    /* Subtle blood glow */
-    text-shadow: 0 0 20px rgba(100, 0, 0, 0.3);
+    /* Text Shadow to make it pop off the waves */
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
   }
 
   p {
     margin: 0.5rem 0;
     font-size: 1.2rem;
     font-style: italic;
-    color: #7a7a7a;
+    color: #8a8a8a;
     opacity: 0;
     animation: fadeSlide 1.5s ease forwards;
   }
@@ -163,10 +176,9 @@
     text-transform: uppercase;
   }
 
-  p:nth-of-type(1) { animation-delay: 3.5s; }
-  p:nth-of-type(2) { animation-delay: 3.8s; }
+  p:nth-of-type(1) { animation-delay: 3.2s; }
+  p:nth-of-type(2) { animation-delay: 3.5s; }
 
-  /* --- ANIMATIONS --- */
   @keyframes float {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-8px); }
@@ -180,15 +192,14 @@
 
   @keyframes typing {
     from { width: 0 }
-    to { width: 100%; } /* Adjusted to fit text content dynamically */
+    to { width: 100%; }
   }
 
   @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: var(--accent); }
+    50% { border-color: var(--highlight); }
   }
   
-  /* Responsive adjustments */
   @media (max-width: 600px) {
     h1 { font-size: 1.5rem; letter-spacing: 0.1em; }
     nav { justify-content: center; gap: 1rem; }
