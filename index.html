@@ -52,7 +52,7 @@
     100% { opacity: 1; }
   }
 
-  /* --- NAVIGATION (Exact match to notes.html) --- */
+  /* --- NAVIGATION --- */
   nav {
     padding: 1.5rem 2rem;
     display: flex;
@@ -64,9 +64,9 @@
   nav a {
     color: #888; 
     text-decoration: none;
-    font-family: var(--font-header); /* Cinzel Font */
-    font-weight: bold;              /* Match notes.html */
-    font-size: 0.9rem;              /* Match notes.html */
+    font-family: var(--font-header); 
+    font-weight: bold;             
+    font-size: 0.9rem;             
     letter-spacing: 0.1em;
     text-transform: uppercase;
     position: relative;
@@ -77,7 +77,7 @@
     content: "";
     position: absolute;
     bottom: -4px;
-    left: 0; /* Align left like notes.html */
+    left: 0; 
     width: 0;
     height: 1px;
     background-color: var(--highlight);
@@ -100,7 +100,7 @@
   }
 
   nav a.active::after {
-    width: 100%; /* Keep underline for active page */
+    width: 100%; 
   }
 
   /* --- MAIN CONTENT --- */
@@ -132,12 +132,9 @@
     letter-spacing: 0.2em;
     color: var(--text);
     margin: 0.5rem 0;
-    
-    /* Fade in only, no cursor */
     opacity: 0;
     animation: fadeSlide 1.5s ease forwards;
     animation-delay: 0.5s;
-    
     text-shadow: 0 5px 15px rgba(0,0,0,0.8);
   }
 
@@ -182,8 +179,7 @@
 
   <nav>
     <a href="index.html" class="active">Home</a>
-    <a href="cv.pdf" target="_blank">CV</a>
-    <a href="notes.html">Notes</a>
+    <a href="cv.html">CV</a> <a href="notes.html">Notes</a>
     <a href="research.html">Research</a>
   </nav>
 
