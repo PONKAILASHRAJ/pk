@@ -11,9 +11,10 @@
 
   <style>
   :root {
+    /* --- CRIMSON WAVES PALETTE --- */
     --bg: #000000;
     --text: #c2baba; 
-    --accent: #6b0000; /* Richer blood red */
+    --accent: #6b0000; 
     --highlight: #ff1a1a; 
     --font-main: 'EB Garamond', serif;
     --font-header: 'Cinzel', serif; 
@@ -30,32 +31,18 @@
     overflow-x: hidden;
   }
 
-  /* --- THE RED WAVE BACKGROUND --- */
+  /* --- BACKGROUND --- */
   body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background:
-          /* 1. FLUID WAVE TEXTURE */
           url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
-          
-          /* 2. RIPPLE GRADIENTS */
-          repeating-radial-gradient(
-            circle at 50% 120%, 
-            transparent 0, 
-            transparent 10%, 
-            rgba(60, 0, 0, 0.4) 12%, 
-            transparent 15%
-          ),
-
-          /* 3. DEEP RED BLOBS */
+          repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60, 0, 0, 0.4) 12%, transparent 15%),
           radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
           radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
-          
-          /* 4. BLACK BASE */
           #000000;
-      
       background-blend-mode: color-dodge, normal, screen, normal;
       animation: pulseRed 8s ease-in-out infinite alternate;
   }
@@ -65,19 +52,21 @@
     100% { opacity: 1; }
   }
 
+  /* --- NAVIGATION (Exact match to notes.html) --- */
   nav {
     padding: 1.5rem 2rem;
     display: flex;
     justify-content: flex-end;
     gap: 2.5rem;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
   }
 
   nav a {
     color: #888; 
     text-decoration: none;
-    font-family: var(--font-header);
-    font-size: 0.9rem;
+    font-family: var(--font-header); /* Cinzel Font */
+    font-weight: bold;              /* Match notes.html */
+    font-size: 0.9rem;              /* Match notes.html */
     letter-spacing: 0.1em;
     text-transform: uppercase;
     position: relative;
@@ -87,12 +76,11 @@
   nav a::after {
     content: "";
     position: absolute;
-    bottom: -5px;
-    left: 50%;
+    bottom: -4px;
+    left: 0; /* Align left like notes.html */
     width: 0;
     height: 1px;
     background-color: var(--highlight);
-    transform: translateX(-50%);
     transition: width 0.3s ease;
     box-shadow: 0 0 8px var(--highlight);
   }
@@ -111,6 +99,11 @@
     text-shadow: 0 0 5px var(--accent);
   }
 
+  nav a.active::after {
+    width: 100%; /* Keep underline for active page */
+  }
+
+  /* --- MAIN CONTENT --- */
   .container {
     display: flex;
     flex-direction: column;
@@ -140,7 +133,7 @@
     color: var(--text);
     margin: 0.5rem 0;
     
-    /* REMOVED: border-right, typing animation, width: 0 */
+    /* Fade in only, no cursor */
     opacity: 0;
     animation: fadeSlide 1.5s ease forwards;
     animation-delay: 0.5s;
