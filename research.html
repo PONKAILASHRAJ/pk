@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research | PONKAILASHRAJ</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* --- CRIMSON WAVES PALETTE --- */
+      --bg: #000000;
+      --text: #c2baba; 
+      --accent: #6b0000; 
+      --highlight: #ff1a1a; 
+      --card-bg: rgba(20, 0, 0, 0.4); /* Glassy dark red */
+      
+      --font-main: 'EB Garamond', serif;
+      --font-header: 'Cinzel', serif; 
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* --- BACKGROUND --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      background:
+          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
+          repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60, 0, 0, 0.4) 12%, transparent 15%),
+          radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
+          radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
+          #000000;
+      background-blend-mode: color-dodge, normal, screen, normal;
+      animation: pulseRed 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseRed {
+      0% { opacity: 0.8; }
+      100% { opacity: 1; }
+    }
+
+    /* --- NAVIGATION --- */
+    nav {
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2.5rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    }
+
+    nav a {
+      color: #888;
+      text-decoration: none;
+      font-family: var(--font-header);
+      font-weight: bold;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: var(--highlight);
+      transition: width 0.3s ease;
+      box-shadow: 0 0 8px var(--highlight);
+    }
+
+    nav a:hover, nav a.active {
+      color: #e0e0e0;
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+    nav a:hover::after, nav a.active::after {
+      width: 100%;
+    }
+
+    /* --- CONTAINER --- */
+    .container {
+      padding: 4rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: var(--font-header);
+      color: var(--text);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 10px;
+      line-height: 1;
+      margin-bottom: 2rem;
+      font-weight: 500;
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+      opacity: 0;
+      animation: fadeSlide 1s ease forwards;
+      text-align: center;
+    }
+
+    h2 {
+      font-family: var(--font-header);
+      color: var(--highlight);
+      margin-top: 4rem;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      border-left: 3px solid var(--accent);
+      padding-left: 1rem;
+      text-shadow: 0 0 10px rgba(107, 0, 0, 0.5);
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    /* --- PROJECT CARDS --- */
+    .project-card {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background-color: var(--card-bg);
+      border: 1px solid #330000;
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle red glow on hover */
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(50, 0, 0, 0.6);
+      background-color: rgba(50, 0, 0, 0.5);
+      border-color: var(--accent);
+    }
+
+    .project-title {
+      font-family: var(--font-header);
+      font-size: 1.3rem;
+      color: #e0e0e0;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-meta {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Links inside cards */
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--highlight);
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .project-link:hover {
+      border-bottom: 1px solid var(--highlight);
+      text-shadow: 0 0 8px var(--highlight);
+    }
+
+    /* --- ANIMATIONS --- */
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cv.html">CV</a>
+    <a href="notes.html">Notes</a>
+    <a href="research.html" class="active">Research</a>
+  </nav>
+
+  <div class="container">
+    <h1>Research</h1>
+
+    <h2 style="animation-delay: 0.2s;">Preprints & Publications</h2>
+
+    <div class="project-card" style="animation-delay: 0.4s;">
+      <div class="project-title">Analysis of ODE Systems for Low Earth Orbit</div>
+      <div class="project-meta">Undergraduate Research Project • 2025</div>
+      <div class="project-desc">
+        Investigating stochastic models applied to orbital mechanics. We analyze the stability and long-term behavior of debris clouds using systems of ordinary differential equations.
+      </div>
+      <a href="#" class="project-link">View Abstract &rarr;</a>
+    </div>
+
+    <h2 style="animation-delay: 0.6s;">Projects</h2>
+
+    <div class="project-card" style="animation-delay: 0.8s;">
+      <div class="project-title">Limit Theorems in Random Graphs</div>
+      <div class="project-meta">Course Project • Stochastic Processes</div>
+      <div class="project-desc">
+        A study on the emergence of the giant component in Erdős–Rényi graphs and its relation to critical percolation thresholds.
+      </div>
+    </div>
+
+    <div class="project-card" style="animation-delay: 1.0s;">
+      <div class="project-title">Martingales in Finance</div>
+      <div class="project-meta">Independent Study</div>
+      <div class="project-desc">
+        Applying martingale convergence theorems to model fair pricing in efficient markets without arbitrage.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
