@@ -4,89 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>B. Pon Kailash Raj</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+
   <style>
   :root {
-    /* --- THE VOID PALETTE --- */
+    /* --- THE GOTHIC PALETTE --- */
     --bg: #000000;
-    --text: #a8a8a8; /* Muted grey, legible against pitch black */
-    --accent: #520000; /* Dried blood red, very dark */
-    --highlight: #8a0000; /* Deep crimson for interactions */
+    --text: #bfb4b4; /* Pale, bone-grey */
+    --accent: #5e0a0a; /* Dried blood red */
+    --highlight: #ff0000; /* Fresh blood/Glowing red */
+    --font-main: 'EB Garamond', serif;
+    --font-header: 'Cinzel', serif; /* Roman/Gothic headers */
   }
 
   body {
     margin: 0;
     padding: 0;
+    background-color: var(--bg);
     color: var(--text);
-    font-family: system-ui, sans-serif;
+    font-family: var(--font-main);
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    background-color: #000000;
   }
 
-  /* --- ALMOST BLACK BACKGROUND --- */
+  /* --- VOID BACKGROUND --- */
   body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background:
-          /* 1. Grain Texture (Very subtle) */
-          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.03"/></svg>'),
-          
-          /* 2. The "Shade" - Extremely deep, near-black reds */
-          /* Top Right faint glow */
-          radial-gradient(circle at 80% 20%, #0f0000 0%, transparent 50%),
-          /* Bottom Left faint glow */
-          radial-gradient(circle at 20% 80%, #0a0000 0%, transparent 60%),
-          
-          /* 3. Pure Black Base */
+          /* Subtle Noise */
+          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#noiseFilter)" opacity="0.04"/></svg>'),
+          /* Deep Red Shadows */
+          radial-gradient(circle at 20% 20%, #1a0000 0%, transparent 60%),
+          radial-gradient(circle at 80% 80%, #0f0000 0%, transparent 60%),
+          /* Pure Black Base */
           #000000;
-      
-      background-blend-mode: overlay, normal, normal, normal;
+      background-blend-mode: overlay, screen, normal;
   }
 
   nav {
-    background: transparent;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     display: flex;
     justify-content: flex-end;
-    gap: 2rem;
+    gap: 2.5rem;
   }
 
   nav a {
-    color: #555; /* Dark grey inactive links */
+    color: #666; 
     text-decoration: none;
-    font-weight: bold;
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     position: relative;
-    transition: color 0.4s ease;
+    transition: all 0.4s ease;
   }
 
+  /* Blood drop underline effect */
   nav a::after {
     content: "";
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 100%;
-    height: 1px; /* Thinner line for elegance */
+    bottom: -5px;
+    left: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
     background-color: var(--highlight);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
-  }
-
-  nav a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px var(--highlight);
   }
 
   nav a:hover {
-    color: var(--highlight);
-    text-shadow: 0 0 15px rgba(138, 0, 0, 0.5); /* Faint red glow */
+    color: #e0e0e0;
+    text-shadow: 0 0 8px var(--accent);
+  }
+
+  nav a:hover::after {
+    opacity: 1;
+    width: 100%;
+    height: 1px;
+    border-radius: 0;
+    box-shadow: 0 0 5px var(--highlight);
   }
 
   nav a.active {
-    color: var(--highlight);
+    color: #a3a3a3;
+    border-bottom: 1px solid var(--accent);
   }
 
   .container {
@@ -95,78 +106,97 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 80px);
   }
 
   .profile-pic {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid #330000; /* Barely visible red border */
-    margin-bottom: 1rem;
-    animation: float 3s ease-in-out infinite, fadeSlide 1s ease forwards;
-    animation-delay: 0.2s;
+    /* Double border for a medallion look */
+    border: 1px solid #330000;
+    outline: 4px solid rgba(20, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+    
+    animation: float 4s ease-in-out infinite, fadeSlide 1.5s ease forwards;
     opacity: 0;
-    /* Very tight, dark shadow */
-    box-shadow: 0 0 30px rgba(20, 0, 0, 0.9); 
+    box-shadow: 0 0 40px rgba(40, 0, 0, 0.4);
   }
 
   h1 {
+    font-family: var(--font-header);
+    font-weight: 500;
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    margin: 0.5rem 0;
+    
+    /* Typewriter effect variables */
     display: inline-block;
     overflow: hidden;
-    border-right: .15em solid var(--highlight);
     white-space: nowrap;
-    letter-spacing: .05em;
+    border-right: 2px solid var(--accent); /* Dark red cursor */
     width: 0;
-    margin: 0.5rem 0 0.25rem;
-    font-size: 2rem;
-    color: #d1d1d1; /* Brighter text to pop against black */
-    animation: typing 3s steps(19, end) forwards, blink-caret .75s step-end infinite;
-    animation-delay: 0.1s;
-    opacity: 1;
+    
+    animation: typing 3.5s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    animation-delay: 0.5s;
+    
+    /* Subtle blood glow */
+    text-shadow: 0 0 20px rgba(100, 0, 0, 0.3);
   }
 
   p {
-    margin: 0.25rem 0;
-    color: var(--accent);
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #7a7a7a;
     opacity: 0;
-    animation: fadeSlide 1s ease forwards;
-    font-weight: 500;
+    animation: fadeSlide 1.5s ease forwards;
   }
 
-  p:nth-of-type(1) { animation-delay: 2.0s; }
-  p:nth-of-type(2) { animation-delay: 2.2s; }
+  .sub-text {
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
 
+  p:nth-of-type(1) { animation-delay: 3.5s; }
+  p:nth-of-type(2) { animation-delay: 3.8s; }
+
+  /* --- ANIMATIONS --- */
   @keyframes float {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
   }
 
   @keyframes fadeSlide {
-    0% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes typing {
     from { width: 0 }
-    to { width: 15.5ch; }
+    to { width: 100%; } /* Adjusted to fit text content dynamically */
   }
 
   @keyframes blink-caret {
     from, to { border-color: transparent }
-    50% { border-color: var(--highlight); }
+    50% { border-color: var(--accent); }
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    h1 { font-size: 1.5rem; letter-spacing: 0.1em; }
+    nav { justify-content: center; gap: 1rem; }
   }
   </style>
 </head>
 <body>
+
   <nav>
     <a href="index.html" class="active">Home</a>
     <a href="cv.pdf" target="_blank">CV</a>
@@ -176,9 +206,12 @@
 
   <div class="container">
     <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+    
     <h1>PONKAILASHRAJ</h1>
+    
     <p>B.Tech Mathematics and Computing</p>
-    <p>Indian Institute of Science, Bengaluru</p>
+    <p class="sub-text">Indian Institute of Science, Bengaluru</p>
   </div>
+
 </body>
 </html>
