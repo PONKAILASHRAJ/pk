@@ -37,11 +37,10 @@
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background:
-          /* 1. FLUID WAVE TEXTURE (SVG) 
-             baseFrequency="0.009 0.08" stretches the noise horizontally to make "waves" */
+          /* 1. FLUID WAVE TEXTURE (SVG) */
           url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
           
-          /* 2. RIPPLE GRADIENTS (The "Waves") */
+          /* 2. RIPPLE GRADIENTS */
           repeating-radial-gradient(
             circle at 50% 120%, 
             transparent 0, 
@@ -72,7 +71,6 @@
     display: flex;
     justify-content: flex-end;
     gap: 2.5rem;
-    /* Glassmorphism hint to separate nav from waves */
     background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
   }
 
@@ -146,13 +144,9 @@
     color: var(--text);
     margin: 0.5rem 0;
     
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid var(--highlight); 
-    width: 0;
-    
-    animation: typing 3s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    /* REMOVED TYPING CURSOR STYLES */
+    opacity: 0;
+    animation: fadeSlide 1.5s ease forwards;
     animation-delay: 0.5s;
     
     /* Text Shadow to make it pop off the waves */
@@ -176,8 +170,8 @@
     text-transform: uppercase;
   }
 
-  p:nth-of-type(1) { animation-delay: 3.2s; }
-  p:nth-of-type(2) { animation-delay: 3.5s; }
+  p:nth-of-type(1) { animation-delay: 0.8s; } /* Adjusted timing */
+  p:nth-of-type(2) { animation-delay: 1.1s; } /* Adjusted timing */
 
   @keyframes float {
     0% { transform: translateY(0px); }
@@ -188,16 +182,6 @@
   @keyframes fadeSlide {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100%; }
-  }
-
-  @keyframes blink-caret {
-    from, to { border-color: transparent }
-    50% { border-color: var(--highlight); }
   }
   
   @media (max-width: 600px) {
