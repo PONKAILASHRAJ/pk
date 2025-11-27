@@ -1,216 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CV | PONKAILASHRAJ</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV | PONKAILASHRAJ</title>
 
-  <style>
-    :root {
-      /* --- CRIMSON WAVES PALETTE --- */
-      --bg: #000000;
-      --text: #c2baba; 
-      --accent: #6b0000; 
-      --highlight: #ff1a1a; 
-      --font-main: 'EB Garamond', serif;
-      --font-header: 'Cinzel', serif; 
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
 
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: var(--font-main);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+    <style>
+        /* --- 1. COLOR PALETTE (Crimson Waves) --- */
+        :root {
+            --bg: #000000;
+            --text: #c2baba;
+            --accent: #6b0000;     /* Deep Blood Red */
+            --highlight: #ff1a1a;  /* Bright Red */
+            --font-main: 'EB Garamond', serif;
+            --font-header: 'Cinzel', serif;
+        }
 
-    /* --- BACKGROUND TEXTURE --- */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1;
-      background:
-          url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
-          repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60, 0, 0, 0.4) 12%, transparent 15%),
-          radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
-          radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
-          #000000;
-      background-blend-mode: color-dodge, normal, screen, normal;
-      animation: pulseRed 8s ease-in-out infinite alternate;
-    }
+        /* --- 2. BASE SETTINGS --- */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-    @keyframes pulseRed {
-      0% { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
+        /* --- 3. THE RED WAVE BACKGROUND --- */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background:
+                /* A. SVG Noise Texture */
+                url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="waveFilter"><feTurbulence type="fractalNoise" baseFrequency="0.009 0.08" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#waveFilter)" opacity="0.08"/></svg>'),
+                /* B. Ripple Gradients */
+                repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60, 0, 0, 0.4) 12%, transparent 15%),
+                /* C. Blood Red Blobs */
+                radial-gradient(circle at 20% 0%, #290000 0%, transparent 50%),
+                radial-gradient(circle at 80% 90%, #3d0000 0%, transparent 60%),
+                /* D. Black Base */
+                #000000;
+            background-blend-mode: color-dodge, normal, screen, normal;
+            animation: pulseRed 8s ease-in-out infinite alternate;
+        }
 
-    /* --- NAVIGATION --- */
-    nav {
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: flex-end;
-      gap: 2.5rem;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-    }
+        @keyframes pulseRed {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
 
-    nav a {
-      color: #888;
-      text-decoration: none;
-      font-family: var(--font-header);
-      font-weight: bold;
-      font-size: 0.9rem; /* Matches Home/Notes */
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      transition: all 0.4s ease;
-    }
+        /* --- 4. NAVIGATION BAR --- */
+        nav {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            gap: 2.5rem;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+        }
 
-    nav a::after {
-      content: "";
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background-color: var(--highlight);
-      transition: width 0.3s ease;
-      box-shadow: 0 0 8px var(--highlight);
-    }
+        nav a {
+            color: #888;
+            text-decoration: none;
+            font-family: var(--font-header);
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            position: relative;
+            transition: all 0.4s ease;
+        }
 
-    nav a:hover, nav a.active {
-      color: #e0e0e0;
-      text-shadow: 0 0 10px var(--accent);
-    }
+        nav a:hover, nav a.active {
+            color: #e0e0e0;
+            text-shadow: 0 0 10px var(--accent);
+        }
 
-    nav a:hover::after, nav a.active::after {
-      width: 100%;
-    }
+        /* Underline Effect */
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--highlight);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px var(--highlight);
+        }
 
-    /* --- MAIN CONTENT --- */
-    .container {
-      padding: 4rem 2rem;
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center; 
-    }
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+        }
 
-    h1 {
-      font-family: var(--font-header);
-      color: var(--text);
-      border-bottom: 2px solid var(--accent);
-      padding-bottom: 10px;
-      line-height: 1;
-      margin-bottom: 2rem;
-      font-weight: 500;
-      font-size: 3rem;
-      letter-spacing: 0.1em;
-      text-shadow: 0 5px 15px rgba(0,0,0,0.8);
-      
-      /* Fade In Animation */
-      opacity: 0;
-      animation: fadeSlide 1s ease forwards;
-    }
+        /* --- 5. MAIN CONTAINER --- */
+        .container {
+            padding: 4rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
 
-    h3 {
-      margin-top: 2rem;
-      font-family: var(--font-header);
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards;
-      animation-delay: 0.5s;
-    }
+        /* Title */
+        h1 {
+            font-family: var(--font-header);
+            color: var(--text);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+            line-height: 1;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            font-size: 3rem;
+            letter-spacing: 0.1em;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            
+            /* Animation: Fade In (No cursor) */
+            opacity: 0;
+            animation: fadeSlide 1s ease forwards;
+        }
 
-    /* Download Button Styling */
-    h3 a {
-      color: var(--highlight);
-      text-decoration: none;
-      font-size: 1.5rem;
-      border: 1px solid var(--accent);
-      padding: 10px 30px;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      background: rgba(40, 0, 0, 0.3);
-      cursor: pointer; /* Ensures it looks clickable */
-    }
+        /* Download Button Container */
+        .btn-container {
+            margin-top: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards;
+            animation-delay: 0.5s;
+        }
 
-    h3 a:hover {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
-    }
+        /* The Button Link */
+        .download-btn {
+            display: inline-block;
+            color: var(--highlight);
+            text-decoration: none;
+            font-family: var(--font-header);
+            font-size: 1.2rem;
+            border: 1px solid var(--accent);
+            padding: 12px 35px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: rgba(40, 0, 0, 0.3);
+            letter-spacing: 0.05em;
+        }
 
-    ul {
-      list-style: none; 
-      padding: 0;
-      margin-top: 3rem;
-      text-align: left; 
-      display: inline-block; 
-    }
+        .download-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 25px rgba(255, 26, 26, 0.5);
+            transform: translateY(-2px);
+        }
 
-    ul li {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeUp 0.8s ease forwards;
-      padding-left: 1.5rem;
-      position: relative;
-    }
+        /* List Styling */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 4rem;
+            text-align: left;
+            display: inline-block;
+        }
 
-    /* Custom Red Arrow Bullets */
-    ul li::before {
-      content: "›";
-      position: absolute;
-      left: 0;
-      color: var(--highlight);
-      font-weight: bold;
-      font-size: 1.5rem;
-      line-height: 1.1;
-    }
+        ul li {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp 0.8s ease forwards;
+            padding-left: 2rem;
+            position: relative;
+        }
 
-    ul li:nth-child(1) { animation-delay: 0.8s; }
-    ul li:nth-child(2) { animation-delay: 1.1s; }
+        /* Custom Arrow Bullet */
+        ul li::before {
+            content: "➤";
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+            font-size: 1rem;
+            top: 4px;
+        }
 
-    /* --- ANIMATIONS --- */
-    @keyframes fadeSlide {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
+        ul li:nth-child(1) { animation-delay: 0.8s; }
+        ul li:nth-child(2) { animation-delay: 1.1s; }
 
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  </style>
+        /* --- 6. ANIMATIONS --- */
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="cv.html" class="active">CV</a>
-    <a href="notes.html">Notes</a>
-    <a href="research.html">Research</a>
-  </nav>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="cv.html" class="active">CV</a>
+        <a href="notes.html">Notes</a>
+        <a href="research.html">Research</a>
+    </nav>
 
-  <div class="container">
-    <h1>CURRICULUM VITAE</h1>
-    
-    <!-- <h3><a href="#" onclick="alert('PDF coming soon! I have not uploaded it yet.'); return false;">Download PDF</a></h3>
-     -->
-    <ul>
-      <li><strong style="color: var(--text)">Education:</strong> B.Tech in Mathematics and Computing, IISc</li>
-      <li><strong style="color: var(--text)">Research Interests:</strong> Probability Theory, Stochastic Processes</li>
-    </ul>
-  </div>
+    <div class="container">
+        <h1>CURRICULUM VITAE</h1>
+        
+        <div class="btn-container">
+            <a href="#" class="download-btn" onclick="alert('PDF not uploaded yet.'); return false;">
+                Download PDF
+            </a>
+        </div>
+
+        <ul>
+            <li>
+                <strong style="color: #e0e0e0;">Education:</strong><br>
+                B.Tech in Mathematics and Computing, IISc
+            </li>
+            <li>
+                <strong style="color: #e0e0e0;">Research Interests:</strong><br>
+                Probability Theory, Stochastic Processes
+            </li>
+        </ul>
+    </div>
 
 </body>
 </html>
