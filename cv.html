@@ -31,7 +31,7 @@
       position: relative;
     }
 
-    /* --- BACKGROUND (Matches Index & Notes) --- */
+    /* --- BACKGROUND --- */
     body::before {
       content: "";
       position: fixed;
@@ -99,7 +99,7 @@
       padding: 4rem 2rem;
       max-width: 900px;
       margin: 0 auto;
-      text-align: center; /* Centered content looks better with this theme */
+      text-align: center; 
     }
 
     h1 {
@@ -114,7 +114,7 @@
       letter-spacing: 0.1em;
       text-shadow: 0 5px 15px rgba(0,0,0,0.8);
       
-      /* Replaced Typewriter with Fade In */
+      /* No cursor, just fade in */
       opacity: 0;
       animation: fadeSlide 1s ease forwards;
     }
@@ -127,6 +127,7 @@
       animation-delay: 0.5s;
     }
 
+    /* Download Button Style */
     h3 a {
       color: var(--highlight);
       text-decoration: none;
@@ -142,15 +143,14 @@
       background: var(--accent);
       color: #fff;
       box-shadow: 0 0 20px rgba(255, 26, 26, 0.4);
-      text-decoration: none;
     }
 
     ul {
-      list-style: none; /* Removed default bullets for custom look */
+      list-style: none; 
       padding: 0;
       margin-top: 3rem;
-      text-align: left; /* Keep list left-aligned */
-      display: inline-block; /* Center the block itself */
+      text-align: left; 
+      display: inline-block; 
     }
 
     ul li {
@@ -163,7 +163,7 @@
       position: relative;
     }
 
-    /* Custom Red Bullet Points */
+    /* Red Bullet Points */
     ul li::before {
       content: "›";
       position: absolute;
@@ -202,7 +202,7 @@
   <div class="container">
     <h1>CURRICULUM VITAE</h1>
     
-    <h3><a href="notes/PK_Resume.pdf" target="_blank">Download PDF</a></h3>
+    <h3><a href="cv.pdf" target="_blank">Download PDF</a></h3>
     
     <ul>
       <li><strong style="color: var(--text)">Education:</strong> B.Tech in Mathematics and Computing, IISc</li>
