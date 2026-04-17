@@ -1,1 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stopped Martingales | PONKAILASHRAJ</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$','$'],['\\(','\\)']],
+        displayMath: [['$$','$$'],['\\[','\\]']],
+        packages: {'[+]': ['ams']},
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+
+  <style>
+    :root {
+      --bg: #000;
+      --text: #c8c0c0;
+      --accent: #6b0000;
+      --highlight: #ff1a1a;
+      --font-main: 'EB Garamond', Georgia, serif;
+      --font-header: 'Cinzel', serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-main);
+      font-size: 18px;
+      line-height: 1.85;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        repeating-radial-gradient(circle at 50% 120%, transparent 0, transparent 10%, rgba(60,0,0,0.35) 12%, transparent 15%),
+        radial-gradient(circle at 20% 0%, #1a0000 0%, transparent 55%),
+        radial-gradient(circle at 80% 90%, #290000 0%, transparent 60%),
+        #000;
+      animation: pulseRed 9s ease-in-out infinite alternate;
+    }
+    @keyframes pulseRed { 0%{opacity:.75} 100%{opacity:1} }
+
+    nav {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+      padding: 1.4rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 2.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #777;
+      text-decoration: none;
+      font-family: var(--font-header);
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a:hover, nav a.active { color: #ddd; text-shadow: 0 0 10px var(--accent); }
+    nav a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -4px;
+      width: 0; height: 1px;
+      background: var(--highlight);
+      transition: width 0.3s;
+    }
+    nav a:hover::after, nav a.active::after { width: 100%; }
+
+    .page-wrap {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 6rem;
+      gap: 3rem;
+      align-items: flex-start;
+    }
+
+    .toc {
+      width: 210px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 90px;
+      padding-top: 1rem;
+    }
+    .toc-title {
+      font-family: var(--font-header);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6b0000;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #2a0000;
+      padding-bottom: 0.5rem;
+    }
+    .toc ol { list-style: none; padding: 0; }
+    .toc li { margin-bottom: 0.5rem; }
+    .toc a {
+      color: #777;
+      text-decoration: none;
+      font-size: 0.8rem;
+      line-height: 1.4;
+      display: block;
+      transition: color 0.2s;
+      font-style: italic;
+    }
+    .toc a:hover { color: #ff5555; }
+    .toc .toc-num { font-style: normal; color: #4a0000; margin-right: 0.3rem; font-family: var(--font-header); font-size: 0.65rem; }
+
+    main { flex: 1; min-width: 0; padding-top: 1rem; }
+
+    .doc-title {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #2a0000;
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeUp 0.9s 0.2s ease forwards;
+    }
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+    .doc-title h1 {
+      font-family: var(--font-header);
+      font-weight: 500;
+      font-size: 2rem;
+      color: #e8e0e0;
+      line-height: 1.25;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.6rem;
+    }
+    .doc-title .subtitle { font-size: 1rem; color: #888; font-style: italic; }
+    .doc-meta { margin-top: 0.8rem; font-size: 0.75rem; color: #5a0000; font-family: var(--font-header); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    h2.section-head {
+      font-family: var(--font-header);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #e0d0d0;
+      margin: 3.5rem 0 1.4rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #2a0000;
+      letter-spacing: 0.04em;
+      scroll-margin-top: 100px;
+    }
+    h2.section-head .sec-num { color: #6b0000; margin-right: 0.5rem; font-size: 0.9em; }
+
+    h3.subsection-head {
+      font-family: var(--font-header);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: #b09090;
+      margin: 2rem 0 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    p { margin-bottom: 1.1rem; color: var(--text); }
+
+    .env { margin: 1.8rem 0; border-radius: 2px; overflow: hidden; border: 1px solid transparent; }
+    .env-header { padding: 5px 14px 4px; font-family: var(--font-header); font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; }
+    .env-body { padding: 1rem 1.3rem 1.1rem; font-size: 0.97em; line-height: 1.8; }
+    .env-body p:last-child { margin-bottom: 0; }
+    .env-body ol, .env-body ul { padding-left: 1.5rem; margin: 0.5rem 0; }
+    .env-body li { margin-bottom: 0.35rem; }
+
+    .env-definition { border-color: #4a1a6b; background: rgba(40,0,60,0.25); }
+    .env-definition .env-header { background: #2d0044; color: #c87fff; }
+    .env-theorem { border-color: #0a3060; background: rgba(0,20,60,0.25); }
+    .env-theorem .env-header { background: #061d40; color: #60a0ff; }
+    .env-lemma { border-color: #0a3a1a; background: rgba(0,30,15,0.25); }
+    .env-lemma .env-header { background: #062010; color: #78dc8c; }
+    .env-remark { border-color: #4a2800; background: rgba(40,15,0,0.25); }
+    .env-remark .env-header { background: #2e1600; color: #ffb464; }
+    .env-proof { border-color: #2a2a2a; background: rgba(15,15,15,0.4); }
+    .env-proof .env-header { background: #111; color: #aaa; }
+    .env-question { border-color: #3a1a5a; background: rgba(30,10,50,0.3); }
+    .env-question .env-header { background: #220a38; color: #c8a0ff; }
+    .env-example { border-color: #3a2a10; background: rgba(30,18,0,0.3); }
+    .env-example .env-header { background: #221500; color: #d4b480; }
+    .env-step { border-color: #2a2a2a; background: rgba(20,20,20,0.3); }
+    .env-step .env-header { background: #181818; color: #c8c8c8; }
+    .env-warning { border-color: #5a0a1a; background: rgba(50,0,10,0.3); }
+    .env-warning .env-header { background: #380008; color: #ff7890; }
+    .env-claim { border-color: #0a3a3a; background: rgba(0,25,25,0.3); }
+    .env-claim .env-header { background: #062020; color: #64dcdc; }
+    .env-conclusion { border-color: #0a2a4a; background: rgba(0,18,40,0.3); }
+    .env-conclusion .env-header { background: #051525; color: #78b4ff; }
+    .env-table { border-color: #3a2a10; background: rgba(20,12,0,0.3); }
+    .env-table .env-header { background: #1a0e00; color: #d4b480; }
+
+    mjx-container { overflow-x: auto; max-width: 100%; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.88em; margin: 0.5rem 0; }
+    th { border-bottom: 1.5px solid #6b0000; padding: 6px 10px; text-align: left; color: #e0d0d0; font-family: var(--font-header); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    td { border-bottom: 0.5px solid #1e0000; padding: 8px 10px; color: #c0b0b0; vertical-align: top; }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: #6b0000;
+      text-decoration: none;
+      font-family: var(--font-header);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #ff5555; }
+    .back-link::before { content: '← '; }
+
+    @media (max-width: 860px) { .toc { display: none; } .doc-title h1 { font-size: 1.6rem; } }
+    @media (max-width: 560px) { body { font-size: 16px; } nav { gap: 1.5rem; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="cv.pdf" target="_blank">CV</a>
+  <a href="notes.html" class="active">Notes</a>
+  <a href="research.html">Research</a>
+</nav>
+
+<div class="page-wrap">
+
+  <aside class="toc">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#sec1"><span class="toc-num">1.</span>Background and Conventions</a></li>
+      <li><a href="#sec2"><span class="toc-num">2.</span>The Stopped σ-algebra</a></li>
+      <li><a href="#sec3"><span class="toc-num">3.</span>Adaptedness of the Stopped Process</a></li>
+      <li><a href="#sec4"><span class="toc-num">4.</span>Stopped Martingale is a Martingale</a></li>
+      <li><a href="#sec5"><span class="toc-num">5.</span>The Optional Stopping Theorem</a></li>
+      <li><a href="#sec6"><span class="toc-num">6.</span>Augmented Filtrations</a></li>
+      <li><a href="#sec7"><span class="toc-num">7.</span>Summary</a></li>
+    </ol>
+  </aside>
+
+  <main>
+    <a class="back-link" href="notes.html">Back to Notes</a>
+
+    <div class="doc-title">
+      <h1>Stopped Martingales and Optional Stopping</h1>
+      <div class="subtitle">Adaptedness, Stopped Filtrations, Regularization, and the Optional Stopping Theorem in Continuous Time</div>
+      <div class="doc-meta">Last updated: June 27, 2025 &nbsp;·&nbsp; Stochastic Processes</div>
+    </div>
+
+    <h2 class="section-head" id="sec1"><span class="sec-num">1.</span> Background and Conventions</h2>
+
+    <p>We work throughout on a fixed probability space $(\Omega, \mathcal{F}, \mathbb{P})$ carrying a filtration $(\mathcal{F}_t)_{t \ge 0}$.</p>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 1 — Usual conditions</div>
+      <div class="env-body">
+        The filtration $(\mathcal{F}_t)_{t\ge0}$ satisfies the <em>usual conditions</em> if:
+        <ol type="i">
+          <li><strong>Right-continuity:</strong> $\mathcal{F}_t = \bigcap_{s>t}\mathcal{F}_s$ for all $t\ge0$.</li>
+          <li><strong>Completeness:</strong> $\mathcal{F}_0$ (hence every $\mathcal{F}_t$) contains all $\mathbb{P}$-null sets of $\mathcal{F}$.</li>
+        </ol>
+        Right-continuity ensures dyadic approximations of stopping times are themselves stopping times. Completeness ensures measurability issues from a.s. equalities are harmless.
+      </div>
+    </div>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 2 — Stopping time and stopped σ-algebra</div>
+      <div class="env-body">
+        A random variable $\tau:\Omega\to[0,\infty]$ is a <em>stopping time</em> w.r.t. $(\mathcal{F}_t)$ if $\{\tau\le t\}\in\mathcal{F}_t$ for every $t\ge0$.
+        <p>The <em>stopped σ-algebra</em> is
+        \[ \mathcal{F}_\tau := \bigl\{A\in\mathcal{F} : A\cap\{\tau\le t\}\in\mathcal{F}_t\ \text{ for all }t\ge0\bigr\}. \]
+        Intuitively, $\mathcal{F}_\tau$ is the information available to an observer who watches the process up to the random time $\tau$.</p>
+      </div>
+    </div>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 3 — RCLL martingale</div>
+      <div class="env-body">
+        A process $(M_t)_{t\ge0}$ is an <em>RCLL martingale</em> w.r.t. $(\mathcal{F}_t)$ if:
+        <ol type="i">
+          <li><strong>Martingale property:</strong> $\mathbb{E}[|M_t|]<\infty$ and $\mathbb{E}[M_t\mid\mathcal{F}_s]=M_s$ a.s. for all $0\le s\le t$.</li>
+          <li><strong>RCLL paths:</strong> For $\mathbb{P}$-a.e. $\omega$, the sample path $t\mapsto M_t(\omega)$ is right-continuous with left limits everywhere.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 4 — Stopped process</div>
+      <div class="env-body">
+        Given a process $(M_t)_{t\ge0}$ and a stopping time $\tau$, the <em>stopped process</em> is
+        \[ M^\tau_t := M_{t\wedge\tau}, \qquad t\ge0. \]
+        The stopped process "freezes" at the value $M_\tau$ once time reaches $\tau$.
+      </div>
+    </div>
+
+    <div class="env env-remark">
+      <div class="env-header">Remark — Why RCLL?</div>
+      <div class="env-body">
+        RCLL is the minimal path regularity that makes $M_\tau$ well-defined and $\mathcal{F}$-measurable for a general stopping time $\tau$. Every $L^1$-bounded martingale in continuous time admits an RCLL modification under the usual conditions.
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec2"><span class="sec-num">2.</span> The Stopped σ-Algebra: Size and Structure</h2>
+
+    <div class="env env-question">
+      <div class="env-header">Question 1</div>
+      <div class="env-body">
+        Is $\mathcal{F}_\tau$ bigger than $\mathcal{F}_t$ for a fixed time $t$? If $\tau = t$ is the constant stopping time, do we recover $\mathcal{F}_t$? And if $\tau \ge t$ always, what is the relationship between $\mathcal{F}_t$ and $\mathcal{F}_\tau$?
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 1 — Basic properties of $\mathcal{F}_\tau$</div>
+      <div class="env-body">
+        Let $\sigma,\tau$ be stopping times with $\sigma\le\tau$ a.s. Then:
+        <ol type="i">
+          <li>$\mathcal{F}_\tau$ is a $\sigma$-algebra.</li>
+          <li>If $\tau = t$ (constant), then $\mathcal{F}_\tau = \mathcal{F}_t$.</li>
+          <li>$\mathcal{F}_\sigma \subseteq \mathcal{F}_\tau$ whenever $\sigma\le\tau$ a.s.</li>
+          <li>$\mathcal{F}_\tau\subseteq\mathcal{F}$ (sub-σ-algebra of the full σ-algebra).</li>
+          <li>$\{\tau\le s\}\in\mathcal{F}_{\tau}$ for every $s\ge0$; in particular $\tau$ is $\mathcal{F}_\tau$-measurable.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        <p><strong>(i)</strong> $\Omega\cap\{\tau\le t\}=\{\tau\le t\}\in\mathcal{F}_t$. Closed under complements: $A^c\cap\{\tau\le t\}=\{\tau\le t\}\setminus(A\cap\{\tau\le t\})\in\mathcal{F}_t$. Closed under countable unions: $(\bigcup_n A_n)\cap\{\tau\le t\}=\bigcup_n(A_n\cap\{\tau\le t\})\in\mathcal{F}_t$.</p>
+        <p><strong>(ii)</strong> For $s&lt;t$: $A\cap\emptyset=\emptyset\in\mathcal{F}_s$ automatically. For $s\ge t$: $A\cap\Omega=A\in\mathcal{F}_s$ iff $A\in\mathcal{F}_t\subseteq\mathcal{F}_s$. So $\mathcal{F}_\tau=\mathcal{F}_t$.</p>
+        <p><strong>(iii)</strong> Let $A\in\mathcal{F}_\sigma$. On $\{\sigma>t\}$, since $\sigma\le\tau$, we have $\tau\ge\sigma>t$, so $\{\sigma>t\}\cap\{\tau\le t\}=\emptyset$. Therefore $A\cap\{\tau\le t\}=A\cap\{\sigma\le t\}\cap\{\tau\le t\}\in\mathcal{F}_t$.</p>
+        <p><strong>(iv)</strong> Immediate from the definition. <strong>(v)</strong> Check $\{\tau\le s\}\cap\{\tau\le t\}=\{\tau\le s\wedge t\}\in\mathcal{F}_{s\wedge t}\subseteq\mathcal{F}_t$. $\square$</p>
+      </div>
+    </div>
+
+    <div class="env env-question">
+      <div class="env-header">Question 2</div>
+      <div class="env-body">
+        How much bigger is $\mathcal{F}_\tau$ than any fixed-time $\sigma$-algebra $\mathcal{F}_t$?
+      </div>
+    </div>
+
+    <div class="env env-example">
+      <div class="env-header">Example — Strict inclusion $\mathcal{F}_t \subsetneq \mathcal{F}_\tau$</div>
+      <div class="env-body">
+        Let $B=(B_t)_{t\ge0}$ be standard Brownian motion, and let $\tau := \inf\{t\ge0: B_t = 1\}$. Then $\tau&lt;\infty$ a.s. The event $A:=\{\tau\le 1\}=\{\max_{0\le t\le 1}B_t\ge 1\}$ satisfies $A\in\mathcal{F}_\tau$ but $A\notin\mathcal{F}_t$ for any $t&lt;1$. Thus $\mathcal{F}_\tau$ is <em>strictly larger</em> than any fixed-time $\sigma$-algebra $\mathcal{F}_t$ with $t&lt;\sup\tau$.
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 2 — Characterisation of $\mathcal{F}_\tau$</div>
+      <div class="env-body">
+        Under the usual conditions, $\mathcal{F}_\tau = \sigma\bigl(\{M_\tau : M\text{ is RCLL adapted}\}\bigr)$. That is, $\mathcal{F}_\tau$ is the smallest $\sigma$-algebra making $X_\tau$ measurable for every RCLL adapted process $X$.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof (Sketch)</div>
+      <div class="env-body">
+        The inclusion $\supseteq$ follows from: for $B\in\mathcal{B}(\mathbb{R})$,
+        \[ \{X_\tau\in B\}\cap\{\tau\le t\} = \bigcap_{k=1}^\infty \bigcup_{j=1}^{\infty}\{X_{(j-1)2^{-k}}\in B\}\cap \{(j-1)2^{-k}\le\tau\le j2^{-k}\le t\} \in\mathcal{F}_t, \]
+        using RCLL to approximate $X_\tau$ by dyadic samplings. The inclusion $\subseteq$ follows by taking $X_t:=\mathbf{1}_A\cdot\mathbf{1}_{[t_0,\infty)}(t)$ for $A\in\mathcal{F}_{t_0}$. $\square$
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec3"><span class="sec-num">3.</span> Adaptedness of the Stopped Process</h2>
+
+    <div class="env env-question">
+      <div class="env-header">Question 3</div>
+      <div class="env-body">
+        Is the stopped process $M^\tau_t = M_{t\wedge\tau}$ adapted to (i) the original filtration $(\mathcal{F}_t)$, or (ii) the stopped filtration $(\mathcal{F}_{t\wedge\tau})$? Also: is $M_\tau$ measurable w.r.t. $\mathcal{F}_\tau$?
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 3 — Adapted to the original filtration</div>
+      <div class="env-body">
+        Let $(M_t)$ be RCLL adapted to $(\mathcal{F}_t)$, and $\tau$ a stopping time. Then $M_{t\wedge\tau}$ is $\mathcal{F}_t$-measurable for every $t\ge0$.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        Write $M_{t\wedge\tau} = M_t\,\mathbf{1}_{\{\tau\ge t\}} + M_\tau\,\mathbf{1}_{\{\tau&lt;t\}}$. The first term is $\mathcal{F}_t$-measurable. For the second, approximate $\tau$ by dyadic $\tau_n\downarrow\tau$: then $M_{\tau_n}\,\mathbf{1}_{\{\tau_n&lt;t\}}$ is $\mathcal{F}_t$-measurable (finite sum), and $M_{\tau_n}\to M_\tau$ a.s. by RCLL, so the limit is $\mathcal{F}_t$-measurable by completeness. $\square$
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 4 — Adapted to the stopped filtration</div>
+      <div class="env-body">
+        Under the same hypotheses, $M_{t\wedge\tau}$ is also $\mathcal{F}_{t\wedge\tau}$-measurable for every $t\ge0$.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        It suffices to show $M_\sigma$ is $\mathcal{F}_\sigma$-measurable for any stopping time $\sigma$ (here $\sigma=t\wedge\tau$). Define $\sigma_n:=\lceil 2^n\sigma\rceil/2^n\wedge N$. Then $M_{\sigma_n}=\sum_k M_{k2^{-n}}\,\mathbf{1}_{\{\sigma_n=k2^{-n}\}}$ is $\mathcal{F}_\sigma$-measurable (each indicator lies in $\mathcal{F}_\sigma$ by a direct check). Since $M$ has RCLL paths and $\sigma_n\downarrow\sigma$, $M_{\sigma_n}\to M_\sigma$ a.s., so the limit is $\mathcal{F}_\sigma$-measurable by completeness. $\square$
+      </div>
+    </div>
+
+    <div class="env env-question">
+      <div class="env-header">Question 4</div>
+      <div class="env-body">
+        We showed $(M^\tau_t)$ is adapted to both $(\mathcal{F}_{t\wedge\tau})$ and $(\mathcal{F}_t)$. Since $t\wedge\tau\le t$, Lemma 1(iii) gives $\mathcal{F}_{t\wedge\tau}\subseteq\mathcal{F}_t$. So the stopped filtration is coarser. Can the inclusion be strict?
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 5 — Stopped filtration is coarser than the original</div>
+      <div class="env-body">
+        For any stopping time $\tau$ and $t\ge0$: (i) $\mathcal{F}_{t\wedge\tau}\subseteq\mathcal{F}_t$; (ii) the inclusion is strict when $\tau&lt;t$ with positive probability; (iii) on $\{\tau\ge t\}$ the two coincide.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        <p><strong>(i)</strong> Immediate from Lemma 1(iii). <strong>(iii)</strong> On $\{\tau\ge t\}$, $t\wedge\tau=t$ so $\mathcal{F}_{t\wedge\tau}=\mathcal{F}_t$ there.</p>
+        <p><strong>(ii)</strong> Take BM $B_t$, $\tau=\inf\{t:B_t=1\}$, $t=2$. Then $A=\{B_2>2\}\in\mathcal{F}_2$ but $A\notin\mathcal{F}_{2\wedge\tau}$, since on $\{\tau\le 2\}$ the value of $B_2$ is not determined by the stopped path. $\square$</p>
+      </div>
+    </div>
+
+    <div class="env env-remark">
+      <div class="env-header">Remark — Intuition on the two filtrations</div>
+      <div class="env-body">
+        $\mathcal{F}_t$ records everything up to time $t$, even after $\tau$. The stopped filtration $\mathcal{F}_{t\wedge\tau}$ records only information up to $\min(t,\tau)$ — it genuinely "forgets" later times. This makes $\mathcal{F}_{t\wedge\tau}$ the more intrinsic filtration for the stopped process.
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec4"><span class="sec-num">4.</span> The Stopped Martingale is a Martingale</h2>
+
+    <p>Let $(M_t)$ be a martingale w.r.t. $(\mathcal{F}_t)$. We ask three questions.</p>
+
+    <div class="env env-question">
+      <div class="env-header">Question 5(a)</div>
+      <div class="env-body">
+        Is $(M_{t\wedge\tau})$ a martingale w.r.t. $(\mathcal{F}_t)$? i.e. does $\mathbb{E}[M^\tau_t \mid \mathcal{F}_s] = M_{s\wedge\tau}$ a.s. for all $0\le s\le t$?
+      </div>
+    </div>
+
+    <div class="env env-question">
+      <div class="env-header">Question 5(b)</div>
+      <div class="env-body">
+        Is $(M_{t\wedge\tau})$ a martingale w.r.t. the stopped filtration $(\mathcal{F}_{t\wedge\tau})$? i.e. does $\mathbb{E}[M^\tau_t \mid \mathcal{F}_{s\wedge\tau}] = M_{s\wedge\tau}$ a.s.?
+      </div>
+    </div>
+
+    <div class="env env-question">
+      <div class="env-header">Question 5(c)</div>
+      <div class="env-body">
+        If $\tau_1\le\tau_2$ a.s. are two stopping times, is $\mathbb{E}[M_{\tau_2}\mid\mathcal{F}_{\tau_1}] = M_{\tau_1}$? If not, when is it true?
+      </div>
+    </div>
+
+    <p>If we prove 5(a), then since the stopped filtration is smaller and the process is adapted to it, the theorem below implies 5(b) immediately. We call 5(a) the <strong>Optional Stopping Theorem</strong>.</p>
+
+    <div class="env env-theorem">
+      <div class="env-header">Theorem (Coarser filtration)</div>
+      <div class="env-body">
+        Let $(M_t)$ be a martingale w.r.t. $(\mathcal{F}_t)$, and $(\mathcal{G}_t)$ a filtration with $\mathcal{G}_t\subseteq\mathcal{F}_t$ for all $t$. Then $(M_t)$ is a $(\mathcal{G}_t)$-martingale if and only if it is adapted to $(\mathcal{G}_t)$.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        $(\Rightarrow)$ By definition. $(\Leftarrow)$ By the tower property and $\mathcal{G}_s\subseteq\mathcal{F}_s$:
+        \[ \mathbb{E}[M_t\mid\mathcal{G}_s] = \mathbb{E}[\mathbb{E}[M_t\mid\mathcal{F}_s]\mid\mathcal{G}_s] = \mathbb{E}[M_s\mid\mathcal{G}_s] = M_s, \]
+        where the last equality uses $\mathcal{G}_s$-measurability of $M_s$. $\square$
+      </div>
+    </div>
+
+    <div class="env env-theorem">
+      <div class="env-header">Theorem 2 — Stopped martingale w.r.t. stopped filtration</div>
+      <div class="env-body">
+        Let $(M_t)$ be an RCLL martingale w.r.t. $(\mathcal{F}_t)$ satisfying the usual conditions, and $\tau\le N$ a bounded stopping time. Then $(M_{t\wedge\tau})$ is a martingale w.r.t. $(\mathcal{F}_{t\wedge\tau})$: for all $0\le s\le t$,
+        <ol type="i">
+          <li>$M_{t\wedge\tau}$ is $\mathcal{F}_{t\wedge\tau}$-measurable and integrable.</li>
+          <li>$\mathbb{E}[M_{t\wedge\tau}\mid\mathcal{F}_{s\wedge\tau}]=M_{s\wedge\tau}$ a.s.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        <p><strong>(i)</strong> Adaptedness is Lemma 4. Integrability: $\mathbb{E}[|M_{t\wedge\tau}|]\le\mathbb{E}[|M_N|]&lt;\infty$ by OST.</p>
+        <p><strong>(ii)</strong> Set $\sigma:=s\wedge\tau$, $\rho:=t\wedge\tau$. Then $\sigma\le\rho$, both bounded by $N$, and any $A\in\mathcal{F}_{s\wedge\tau}=\mathcal{F}_\sigma$ satisfies $\int_A M_\rho\,d\mathbb{P}=\int_A M_\sigma\,d\mathbb{P}$ by the Optional Stopping Theorem (Theorem 1). $\square$</p>
+      </div>
+    </div>
+
+    <div class="env env-remark">
+      <div class="env-header">Remark — Stopped martingale w.r.t. original filtration</div>
+      <div class="env-body">
+        $(M_{t\wedge\tau})$ is also a martingale w.r.t. $(\mathcal{F}_t)$: for $0\le s\le t$, $\mathbb{E}[M_{t\wedge\tau}\mid\mathcal{F}_s]=M_{s\wedge\tau}$ a.s. This follows from OST with $\sigma:=s\wedge\tau\le\rho:=t\wedge\tau$ and $A\in\mathcal{F}_{s\wedge\tau}\subseteq\mathcal{F}_s$.
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec5"><span class="sec-num">5.</span> The Optional Stopping Theorem</h2>
+
+    <div class="env env-theorem">
+      <div class="env-header">Theorem 1 — Optional Stopping (Bounded Case)</div>
+      <div class="env-body">
+        Let $(M_t)$ be an RCLL martingale w.r.t. $(\mathcal{F}_t)$ satisfying the usual conditions. Let $\sigma\le\rho$ be stopping times bounded by $N&lt;\infty$. Then
+        \[ \mathbb{E}\bigl[M_\rho\mid\mathcal{F}_\sigma\bigr] = M_\sigma \quad\text{a.s.} \]
+      </div>
+    </div>
+
+    <p><strong>Proof strategy:</strong> (1) Prove for simple stopping times. (2) Approximate by dyadic rounding. (3) Pass to the limit via RCLL and uniform integrability.</p>
+
+    <h3 class="subsection-head">Step 1: Simple Stopping Times</h3>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 5 — Simple stopping time</div>
+      <div class="env-body">
+        A stopping time $\tau$ is <em>simple</em> if $\tau=\sum_i t_i\,\mathbf{1}_{B_i}$ for finitely many $t_i$ and $B_i\in\mathcal{F}_{t_i}$ partitioning $\Omega$.
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 6 — Base case: simple stopping times</div>
+      <div class="env-body">Theorem 1 holds when $\sigma$ and $\rho$ are simple stopping times.</div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        Decompose over values $\{s_i\}$ of $\sigma$: set $A_i:=A\cap\{\sigma=s_i\}\in\mathcal{F}_{s_i}$. The martingale property gives $\int_B M_t\,d\mathbb{P}=\int_B M_s\,d\mathbb{P}$ for $B\in\mathcal{F}_s$, $s\le t$. For each $C_{ij}:=A_i\cap\{\rho=u_j\}\in\mathcal{F}_{s_i}$ (with $u_j\ge s_i$):
+        \[ \int_{A_i}M_\rho\,d\mathbb{P} = \sum_j\int_{C_{ij}}M_{u_j}\,d\mathbb{P} = \sum_j\int_{C_{ij}}M_{s_i}\,d\mathbb{P} = \int_{A_i}M_{s_i}\,d\mathbb{P}. \quad\square \]
+      </div>
+    </div>
+
+    <h3 class="subsection-head">Step 2: Dyadic Approximation</h3>
+
+    <div class="env env-step">
+      <div class="env-header">Construction</div>
+      <div class="env-body">
+        For a bounded stopping time $\tau\le N$ and $n\ge1$: $\tau_n := \frac{\lceil 2^n\tau\rceil}{2^n}\wedge N.$ This is simple, $\tau\le\tau_n\le\tau+2^{-n}$, and $\tau_n\downarrow\tau$ pointwise.
+      </div>
+    </div>
+
+    <h3 class="subsection-head">Step 3: Passing to the Limit</h3>
+
+    <p>By Lemma 6: $\int_A M_{\rho_n}\,d\mathbb{P}=\int_A M_{\sigma_n}\,d\mathbb{P}$ for all $A\in\mathcal{F}_{\sigma_n}$. $\quad (**)$</p>
+
+    <div class="env env-warning">
+      <div class="env-header">Sub-step 3a — Almost sure convergence &nbsp;[RCLL used here and only here]</div>
+      <div class="env-body">
+        Since $M$ has RCLL paths and $\tau_n\downarrow\tau$: $M_{\tau_n}\to M_\tau$ a.s. Hence $M_{\sigma_n}\to M_\sigma$ and $M_{\rho_n}\to M_\rho$ a.s.
+      </div>
+    </div>
+
+    <div class="env env-step">
+      <div class="env-header">Sub-step 3b — Uniform integrability</div>
+      <div class="env-body">
+        Since $M_t=\mathbb{E}[M_N\mid\mathcal{F}_t]$ and conditional expectations of a fixed $L^1$ variable are UI, $\{M_t:t\le N\}$ is UI. Hence $M_{\sigma_n}\xrightarrow{L^1}M_\sigma$ and $M_{\rho_n}\xrightarrow{L^1}M_\rho$.
+      </div>
+    </div>
+
+    <div class="env env-step">
+      <div class="env-header">Sub-step 3c — Filtration inclusion</div>
+      <div class="env-body">
+        $\sigma\le\sigma_n$ implies $\mathcal{F}_\sigma\subseteq\mathcal{F}_{\sigma_n}$, so any $A\in\mathcal{F}_\sigma$ is in $\mathcal{F}_{\sigma_n}$ and $(**)$ applies.
+      </div>
+    </div>
+
+    <div class="env env-conclusion">
+      <div class="env-header">Conclusion</div>
+      <div class="env-body">
+        For any $A\in\mathcal{F}_\sigma$: $(**)$ and $L^1$ convergence give
+        \[ \int_A M_\rho\,d\mathbb{P} = \lim_n\int_A M_{\rho_n}\,d\mathbb{P} = \lim_n\int_A M_{\sigma_n}\,d\mathbb{P} = \int_A M_\sigma\,d\mathbb{P}. \]
+        Since $A$ was arbitrary, $\mathbb{E}[M_\rho\mid\mathcal{F}_\sigma]=M_\sigma$ a.s. $\blacksquare$
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec6"><span class="sec-num">6.</span> Augmented Filtrations and Regularization</h2>
+
+    <div class="env env-definition">
+      <div class="env-header">Definition 6 — Augmented filtration</div>
+      <div class="env-body">
+        Let $\mathcal{N}$ be the collection of all $\mathbb{P}$-null sets. The <em>augmented filtration</em> is $\bar{\mathcal{F}}_t:=\sigma(\mathcal{F}_t\cup\mathcal{N})$, and the <em>right-continuous augmented filtration</em> is $\bar{\mathcal{F}}^+_t:=\bigcap_{s>t}\bar{\mathcal{F}}_s$. The filtration $(\bar{\mathcal{F}}^+_t)$ satisfies the usual conditions by construction.
+      </div>
+    </div>
+
+    <div class="env env-lemma">
+      <div class="env-header">Lemma 8 — RCLL submartingales and augmented filtrations</div>
+      <div class="env-body">
+        If $(X_t)$ is an $(\mathcal{F}_t)$-submartingale with RCLL paths, then it is also a $(\bar{\mathcal{F}}^+_t)$-submartingale.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        <p><strong>Adaptedness:</strong> $X_t=\lim_{u\downarrow t}X_u$ a.s. by RCLL, and each $X_u$ is $\bar{\mathcal{F}}_u$-measurable, so the limit is $\bar{\mathcal{F}}^+_t$-measurable.</p>
+        <p><strong>Inequality:</strong> The submartingale inequality extends from $\mathcal{F}_s$ to $\bar{\mathcal{F}}_s$ by null-set arguments. For $u\downarrow s$: $\mathbb{E}[X_t\mid\bar{\mathcal{F}}_u]\ge X_u$ a.s. By Lévy's backward theorem $\mathbb{E}[X_t\mid\bar{\mathcal{F}}_u]\to\mathbb{E}[X_t\mid\bar{\mathcal{F}}^+_s]$ a.s., and $X_u\to X_s$ a.s. by RCLL. Hence $\mathbb{E}[X_t\mid\bar{\mathcal{F}}^+_s]\ge X_s$ a.s. $\square$</p>
+      </div>
+    </div>
+
+    <div class="env env-theorem">
+      <div class="env-header">Theorem 3 — Regularization (Doob)</div>
+      <div class="env-body">
+        Let $(X_t)$ be a martingale w.r.t. a <strong>right-continuous</strong> filtration $(\mathcal{F}_t)$, with $X_t\in L^1$. Then there exists a process $(Y_t)$ such that: (i) $Y_t=X_t$ a.s. for every fixed $t$; (ii) $Y$ has RCLL paths a.s.; (iii) $(Y_t)$ is an $(\mathcal{F}_t)$-martingale.
+      </div>
+    </div>
+
+    <div class="env env-proof">
+      <div class="env-header">Proof</div>
+      <div class="env-body">
+        <p><strong>Step 1:</strong> Set $Y_t:=\lim_{s\downarrow t,s\in\mathbb{Q}_+}X_s$. This limit exists a.s. and in $L^1$ by UI (since $X_s=\mathbb{E}[X_T\mid\mathcal{F}_s]$ for $s\le T$).</p>
+        <p><strong>Step 2:</strong> By right-continuity of $(\mathcal{F}_t)$: $\int_A Y_t\,d\mathbb{P}=\lim_n\int_A X_{s_n}\,d\mathbb{P}=\int_A X_t\,d\mathbb{P}$ for all $A\in\mathcal{F}_t$, giving $Y_t=X_t$ a.s.</p>
+        <p><strong>Step 3:</strong> Right-continuity of $Y$ follows by definition. Left limits exist a.s. by the upcrossing inequality applied along rationals.</p>
+        <p><strong>Step 4:</strong> $\int_A Y_t\,d\mathbb{P}=\int_A X_t\,d\mathbb{P}=\int_A X_s\,d\mathbb{P}=\int_A Y_s\,d\mathbb{P}$ for $A\in\mathcal{F}_s$, so $(Y_t)$ is a martingale. $\square$</p>
+      </div>
+    </div>
+
+    <div class="env env-remark">
+      <div class="env-header">Remark — Doob's regularization theorem</div>
+      <div class="env-body">
+        This is the theoretical backbone of continuous-time stochastic analysis: it justifies assuming all martingales have RCLL paths, which makes $M_\tau$ well-defined, enables the Optional Stopping Theorem, and supports the Doob–Meyer decomposition and stochastic integration.
+      </div>
+    </div>
+
+    <h2 class="section-head" id="sec7"><span class="sec-num">7.</span> Summary</h2>
+
+    <div class="env env-table">
+      <div class="env-header">Answers to the questions</div>
+      <div class="env-body">
+        <table>
+          <tr><th>Question</th><th>Answer</th></tr>
+          <tr><td>Is $\mathcal{F}_{t\wedge\tau}$ bigger or smaller than $\mathcal{F}_t$?</td><td>Smaller: $\mathcal{F}_{t\wedge\tau}\subseteq\mathcal{F}_t$, strict when $\tau&lt;t$ with positive probability.</td></tr>
+          <tr><td>Is $M^\tau_t$ adapted to $(\mathcal{F}_t)$?</td><td>Yes (Lemma 3).</td></tr>
+          <tr><td>Is $M^\tau_t$ adapted to $(\mathcal{F}_{t\wedge\tau})$?</td><td>Yes, and this is the finer statement (Lemma 4).</td></tr>
+          <tr><td>Is $(M^\tau_t)$ a martingale w.r.t. $(\mathcal{F}_{t\wedge\tau})$?</td><td>Yes (Theorem 2), via the Optional Stopping Theorem.</td></tr>
+          <tr><td>Is $(M^\tau_t)$ a martingale w.r.t. $(\mathcal{F}_t)$?</td><td>Yes, but the stopped filtration version is more intrinsic.</td></tr>
+          <tr><td>Does an RCLL submartingale stay a submartingale under augmentation?</td><td>Yes (Lemma 8).</td></tr>
+          <tr><td>Does every martingale have an RCLL version?</td><td>Yes, on a right-continuous filtration (Theorem 3).</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="env env-table">
+      <div class="env-header">Where each assumption is used</div>
+      <div class="env-body">
+        <table>
+          <tr><th>Assumption</th><th>Where</th><th>Role</th></tr>
+          <tr><td>RCLL paths</td><td>OST Sub-step 3a; Lemma 8</td><td>$M_{\tau_n}\to M_\tau$ a.s.; $X_t=\lim_{u\downarrow t}X_u$</td></tr>
+          <tr><td>Bounded stopping times</td><td>OST Sub-step 3b</td><td>UI of $\{M_t:t\le N\}$</td></tr>
+          <tr><td>Right-continuous filtration</td><td>Lemma 7; Theorem 3 Step 2</td><td>$\tau_n$ is a stopping time; $\mathbb{E}[X_{s_n}\mid\mathcal{F}_t]=X_t$</td></tr>
+          <tr><td>Martingale property</td><td>OST Step 1; Regularization Step 4</td><td>Base case; $Y$ is a martingale</td></tr>
+          <tr><td>UI of $\{X_s:s\le T\}$</td><td>Regularization Step 1</td><td>Right limit $Y_t$ exists a.s. in $L^1$</td></tr>
+          <tr><td>Upcrossing inequality</td><td>Regularization Step 3</td><td>Left limits of $Y$ exist a.s.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="env env-remark">
+      <div class="env-header">Remark — Unbounded stopping times</div>
+      <div class="env-body">
+        Boundedness of $\tau$ is essential for the UI argument. For unbounded $\tau$ one needs the additional hypothesis that $\{M_{t\wedge\tau}:t\ge0\}$ is UI, which guarantees $M_\tau\in L^1$ and $M_{t\wedge\tau}\to M_\tau$ in $L^1$.
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>
