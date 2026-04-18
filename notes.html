@@ -21,8 +21,7 @@
     }
 
     body {
-      margin: 0;
-      padding: 0;
+      margin: 0; padding: 0;
       background-color: var(--bg);
       color: var(--text);
       font-family: var(--font-main);
@@ -43,11 +42,7 @@
         #000000;
       animation: pulseRed 8s ease-in-out infinite alternate;
     }
-
-    @keyframes pulseRed {
-      0% { opacity: 0.8; }
-      100% { opacity: 1; }
-    }
+    @keyframes pulseRed { 0%{opacity:0.8} 100%{opacity:1} }
 
     nav {
       background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
@@ -56,7 +51,6 @@
       justify-content: flex-end;
       gap: 2.5rem;
     }
-
     nav a {
       color: #888;
       text-decoration: none;
@@ -68,12 +62,7 @@
       position: relative;
       transition: all 0.4s ease;
     }
-
-    nav a:hover, nav a.active {
-      color: #e0e0e0;
-      text-shadow: 0 0 10px var(--accent);
-    }
-
+    nav a:hover, nav a.active { color: #e0e0e0; text-shadow: 0 0 10px var(--accent); }
     nav a::after {
       content: '';
       position: absolute;
@@ -83,7 +72,6 @@
       transition: width 0.3s ease;
       box-shadow: 0 0 8px var(--highlight);
     }
-
     nav a:hover::after, nav a.active::after { width: 100%; }
 
     .container {
@@ -116,7 +104,6 @@
       text-shadow: 0 0 10px rgba(107,0,0,0.5);
     }
 
-    /* ── Note card as a full clickable block ── */
     .note {
       margin: 2rem 0;
       padding: 1.5rem;
@@ -129,9 +116,7 @@
       display: block;
       text-decoration: none;
       color: inherit;
-      cursor: pointer;
     }
-
     .note:hover {
       transform: translateX(6px);
       box-shadow: -6px 6px 24px rgba(40,0,0,0.6);
@@ -145,11 +130,19 @@
       margin: 0 0 0.5rem;
       transition: color 0.2s;
     }
-
     .note:hover .note-title {
       color: var(--highlight);
       text-shadow: 0 0 8px var(--highlight);
     }
+
+    .note-arrow {
+      float: right;
+      color: #4a0000;
+      font-size: 1.1rem;
+      transition: color 0.2s, transform 0.2s;
+      margin-top: 2px;
+    }
+    .note:hover .note-arrow { color: var(--highlight); transform: translateX(4px); }
 
     .meta {
       font-size: 0.9rem;
@@ -157,7 +150,6 @@
       margin-bottom: 0.8rem;
       font-style: italic;
     }
-
     .meta span { margin-right: 1.5rem; display: inline-block; }
 
     .note p {
@@ -167,72 +159,30 @@
       font-size: 0.97rem;
     }
 
-    /* Arrow indicator */
-    .note-arrow {
-      float: right;
-      color: #4a0000;
-      font-size: 1.1rem;
-      transition: color 0.2s, transform 0.2s;
-      margin-top: 2px;
-    }
-    .note:hover .note-arrow {
-      color: var(--highlight);
-      transform: translateX(4px);
-    }
-
-    /* Coming soon style */
-    .note.coming-soon {
-      opacity: 0.45;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .note.coming-soon .note-arrow { display: none; }
-
-    .badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-family: var(--font-header);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 2px 8px;
-      border-radius: 2px;
-      margin-left: 0.6rem;
-      vertical-align: middle;
-      position: relative;
-      top: -1px;
-    }
-
-    .badge-new { background: #3d0000; color: #ff7070; border: 1px solid #6b0000; }
-    .badge-soon { background: #1a1a1a; color: #666; border: 1px solid #333; }
-
     .fade-up {
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 0.8s ease forwards;
     }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cv.pdf" target="_blank">CV</a>
+    <a href="notes.html" class="active">Notes</a>
+    <a href="research.html">Research</a>
+  </nav>
 
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="cv.html">CV</a>
-  <a href="notes.html">Notes</a>
-  <a href="research.html">Research</a>
-</nav>
-  
   <div class="container">
     <h1 class="fade-up" style="animation-delay:0.3s;">Notes</h1>
 
-    <!-- ── Stochastic Processes ── -->
     <h2 class="fade-up" style="animation-delay:0.5s;">Stochastic Processes</h2>
 
     <a class="note fade-up" href="notes/stopped-martingales.html" style="animation-delay:0.7s;">
       <span class="note-arrow">→</span>
-      <div class="note-title">Martingales and Stopping Times <span class="badge badge-new">New</span></div>
+      <div class="note-title">Martingales and Stopping Times</div>
       <div class="meta">
         <span>Prerequisites: Measure theory, Conditional Expectation</span>
         <span>Last updated: June 27, 2025</span>
@@ -240,17 +190,14 @@
       <p>Stopped martingales, the Optional Stopping Theorem, adaptedness to stopped filtrations, and Doob's regularization theorem.</p>
     </a>
 
-    
-
-    
-
-   
-
-    
-
-    
-
-    
+    <a class="note fade-up" href="notes/conditional-distributions.html" style="animation-delay:0.9s;">
+      <span class="note-arrow">→</span>
+      <div class="note-title">Conditional Distributions via Kernels</div>
+      <div class="meta">
+        <span>Prerequisites: Measure theory, Radon–Nikodym</span>
+      </div>
+      <p>Regular conditional probabilities, Markov kernels, the disintegration theorem, and connections to Bayesian statistics and Markov chains.</p>
+    </a>
 
   </div>
 </body>
